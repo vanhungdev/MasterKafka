@@ -1,0 +1,6 @@
+.vs/
+Bin/
+bin/
+obj/
+ErrorLogs/
+*.user
