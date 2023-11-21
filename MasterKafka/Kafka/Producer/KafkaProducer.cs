@@ -29,7 +29,7 @@ namespace MasterKafka.Kafka.Producer
             }
             finally
             {
-                //Console.WriteLine(log);
+                Console.WriteLine(log);
                 //LoggingHelper.SetLogStep(log.ToString());
             }
         }
