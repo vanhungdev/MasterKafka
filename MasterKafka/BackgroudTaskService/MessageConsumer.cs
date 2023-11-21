@@ -22,30 +22,31 @@ namespace MasterKafka.BackgroudTaskService
         {
             var topic1 = "events1";
             var topic2 = "events2";
-           /* var topic3 = "events3";
+            var topic3 = "events3";
             var topic4 = "events4";
-            var topic5 = "events5";*/
+            var topic5 = "events5";
             // More Topic
+
 
             _consumerManager.AddConsumer(topic1, 
                 message => { _orderProcess.CreateOrderProcess(message, topic1); return Task.CompletedTask; }, 
                 KafkaConfiguration.ConsumerConfig); // Configuration can be changed
 
-            _consumerManager.AddConsumer(topic2, 
-                message => { _orderProcess.CreateOrderProcess(message, topic2); return Task.CompletedTask; }, 
+            _consumerManager.AddConsumer(topic2,
+                message => { _orderProcess.CreateOrderProcess(message, topic2); return Task.CompletedTask; },
                 KafkaConfiguration.ConsumerConfig);
 
-         /*   _consumerManager.AddConsumer(topic3,
+            _consumerManager.AddConsumer(topic3,
                 message => { _orderProcess.CreateOrderProcess(message, topic3); return Task.CompletedTask; },
                 KafkaConfiguration.ConsumerConfig);
 
             _consumerManager.AddConsumer(topic4,
                 message => { _orderProcess.CreateOrderProcess(message, topic4); return Task.CompletedTask; },
-                KafkaConfiguration.ConsumerConfig); 
+                KafkaConfiguration.ConsumerConfig);
 
             _consumerManager.AddConsumer(topic5,
                 message => { _orderProcess.CreateOrderProcess(message, topic5); return Task.CompletedTask; },
-                KafkaConfiguration.ConsumerConfig);*/
+                KafkaConfiguration.ConsumerConfig);
 
             // More thread
 

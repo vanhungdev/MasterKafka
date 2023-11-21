@@ -9,13 +9,14 @@ namespace MasterKafka.Kafka
 
         static KafkaConfiguration()
         {
-            var ConsumerConfig = new ConsumerConfig
+            var consumerConfig = new ConsumerConfig
             {
                 BootstrapServers = "localhost:9092",
                 GroupId = "spf-group-01",
                 EnableAutoCommit = false,
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
+            ConsumerConfig = consumerConfig;
         }
     }
 }

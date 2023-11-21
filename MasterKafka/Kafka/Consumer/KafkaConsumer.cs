@@ -1,4 +1,5 @@
 ﻿using Confluent.Kafka;
+using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace MasterKafka.Kafka.Consumer
             // Tạm thời chưa ghi log
             using (var consumer = new ConsumerBuilder<Ignore, string>(_kafkaConfig).Build())
             {
+                
                 consumer.Subscribe(topic);
                 try
                 {
@@ -37,8 +39,16 @@ namespace MasterKafka.Kafka.Consumer
 
                         if (!string.IsNullOrEmpty(messageValue))
                         {
-                            await _messageHandler(messageValue);
-                            consumer.Commit(consumeResult);
+                            try
+                            {
+                                await _messageHandler(messageValue);
+                                consumer.Commit(consumeResult);
+                            }
+                            catch (Exception ex)
+                            {
+                                // handle exception
+                                Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} | Exception handler: {ex.Message} | message: {messageValue} | Topic {topic}:");
+                            }
                         }
                         //await Task.Delay(TimeSpan.FromMilliseconds(100));
                     }
