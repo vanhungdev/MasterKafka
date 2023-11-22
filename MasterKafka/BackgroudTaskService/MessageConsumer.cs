@@ -32,7 +32,7 @@ namespace MasterKafka.BackgroudTaskService
                 message => { _orderProcess.CreateOrderProcess(message, topic1); return Task.CompletedTask; }, 
                 KafkaConfiguration.ConsumerConfig); // Configuration can be changed
 
-            _consumerManager.AddConsumer(topic2,
+            /*_consumerManager.AddConsumer(topic2,
                 message => { _orderProcess.CreateOrderProcess(message, topic2); return Task.CompletedTask; },
                 KafkaConfiguration.ConsumerConfig);
 
@@ -46,7 +46,7 @@ namespace MasterKafka.BackgroudTaskService
 
             _consumerManager.AddConsumer(topic5,
                 message => { _orderProcess.CreateOrderProcess(message, topic5); return Task.CompletedTask; },
-                KafkaConfiguration.ConsumerConfig);
+                KafkaConfiguration.ConsumerConfig);*/
 
             // More thread
 
