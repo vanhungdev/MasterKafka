@@ -16,20 +16,20 @@ namespace MasterKafka.OrderProcess
         {
             //var data1 = JsonConvert.DeserializeObject<MyEventDto>(message);
 
-            
-            Console.WriteLine($"[DateTime]: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} || Start process message: {message}           || Topic: {topic}");
-            Task.Delay(3000).Wait();
-            Console.WriteLine($"[DateTime]: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} || Done process message: {message}            || Topic: {topic}");
+            /*   Console.WriteLine($"[DateTime]: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} || Start process message: {message}           || Topic: {topic}");
+               Task.Delay(3000).Wait();
+               Console.WriteLine($"[DateTime]: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} || Done process message: {message}            || Topic: {topic}");*/
 
-            //try
-            //{
-            //    var data = JsonConvert.DeserializeObject<MyEventDto>(message);
-            //    Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} {topic}: {data.Value}");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} {topic}: {ex.Message} : message: {message}");
-            //}
+            try
+            {
+                var data = JsonConvert.DeserializeObject<MyEventDto>(message);
+                Console.WriteLine($"DateTime process message: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} {topic}: {data.Value}");
+                Task.Delay(3000).Wait();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} {topic}: {ex.Message} : message: {message}");
+            }
         }
     }
     public class MyEventDto

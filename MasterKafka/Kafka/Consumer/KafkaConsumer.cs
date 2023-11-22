@@ -1,6 +1,8 @@
 ﻿using Confluent.Kafka;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,11 +37,15 @@ namespace MasterKafka.Kafka.Consumer
                     {
                         // Đọc một batch message từ Kafka vào list
                         var batch = ReadMessageBatchFromKafka(consumer);
+                        Console.WriteLine($"Batch {JsonConvert.SerializeObject(batch)}");
+                        Console.WriteLine($"Batch Count {batch.Count()}");
+                        Console.WriteLine($"------------------------------------------");
 
                         Parallel.ForEach(batch, new ParallelOptions { MaxDegreeOfParallelism = 5 },
                           msg => {
                               try
                               {
+                                  Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}  || Thread {Thread.CurrentThread.ManagedThreadId} starting processing message: {msg}");
                                   _messageHandler(msg);
                               }
                               catch (Exception ex)
@@ -47,7 +53,6 @@ namespace MasterKafka.Kafka.Consumer
                                   Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} | Exception handler: {ex.Message} | message: {msg} | Topic {topic}:");
                               }
                           });
-                        await Task.Delay(TimeSpan.FromMilliseconds(1000));
                     }
                 }
                 catch (OperationCanceledException oe)
@@ -89,7 +94,6 @@ namespace MasterKafka.Kafka.Consumer
                     break;
                 }
             }
-
             return batch;
         }
         public Task StopConsuming(CancellationToken stoppingToken)
