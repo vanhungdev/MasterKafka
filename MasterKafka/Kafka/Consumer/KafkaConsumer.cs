@@ -39,7 +39,7 @@ namespace MasterKafka.Kafka.Consumer
                         // Đọc một batch message từ Kafka vào list
                         var batch = ReadMessageBatchFromKafka(consumer);
                         Console.WriteLine($"Batch {JsonConvert.SerializeObject(batch)}");
-                        Console.WriteLine($"Batch Count {batch.Count()}");
+                        Console.WriteLine($"Batch Count {batch.Count()} -- Topic{topic}");
                         Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}");
                         Console.WriteLine($"------------------------------------------");
 
@@ -83,13 +83,13 @@ namespace MasterKafka.Kafka.Consumer
                 try
                 {
                     // Lấy message và add vào batch
-                    var result = consumer.Consume(TimeSpan.FromMilliseconds(100)); // Chờ 2s nếu k có message mới thì trả về null || 2000*30 =6000 = 1p
+                    var result = consumer.Consume(TimeSpan.FromMilliseconds(100)); // Chờ 3s nếu k có message mới thì trả về null || 100*30 =3000 = 3
                     if (result != null && result.Message != null && !string.IsNullOrEmpty(result.Message.Value))
                     {
-                        batch.Add(result.Message.Value);
+                        batch.Add(result.Message.Value);    
                         consumer.Commit(result); // Commit offset
                         var offset = result.Offset;
-                        Console.WriteLine($"Consumer offset: {offset}   || message: {result.Message.Value}");
+                        //Console.WriteLine($"Consumer offset: {offset}   || message: {result.Message.Value}");
                     }
                 }
                 catch (ConsumeException ex)

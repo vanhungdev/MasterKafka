@@ -23,7 +23,7 @@ namespace MasterKafka.OrderProcess
             try
             {
                 var data = JsonConvert.DeserializeObject<MyEventDto>(message);
-                Console.WriteLine($"DateTime process message: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} {topic}: {data.Value}");
+                Console.WriteLine($"DateTime process message: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} {topic}: {data.Value} topic{topic}");
                 Task.Delay(3000).Wait();
             }
             catch (Exception ex)
