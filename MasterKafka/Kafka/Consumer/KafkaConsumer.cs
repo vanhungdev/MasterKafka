@@ -1,4 +1,5 @@
 ﻿using Confluent.Kafka;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace MasterKafka.Kafka.Consumer
                         var batch = ReadMessageBatchFromKafka(consumer);
                         Console.WriteLine($"Batch {JsonConvert.SerializeObject(batch)}");
                         Console.WriteLine($"Batch Count {batch.Count()}");
+                        Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}");
                         Console.WriteLine($"------------------------------------------");
 
                         Parallel.ForEach(batch, new ParallelOptions { MaxDegreeOfParallelism = 5 },
@@ -81,11 +83,13 @@ namespace MasterKafka.Kafka.Consumer
                 try
                 {
                     // Lấy message và add vào batch
-                    var result = consumer.Consume(TimeSpan.FromMilliseconds(2000)); // Chờ 2s nếu k có message mới thì trả về null || 2000*30 =6000 = 1p
+                    var result = consumer.Consume(TimeSpan.FromMilliseconds(100)); // Chờ 2s nếu k có message mới thì trả về null || 2000*30 =6000 = 1p
                     if (result != null && result.Message != null && !string.IsNullOrEmpty(result.Message.Value))
                     {
                         batch.Add(result.Message.Value);
                         consumer.Commit(result); // Commit offset
+                        var offset = result.Offset;
+                        Console.WriteLine($"Consumer offset: {offset}   || message: {result.Message.Value}");
                     }
                 }
                 catch (ConsumeException ex)
@@ -94,6 +98,8 @@ namespace MasterKafka.Kafka.Consumer
                     break;
                 }
             }
+            //Console.WriteLine($"Done offset:");
+            //Console.WriteLine($"batch offset count:{batch.Count()}");
             return batch;
         }
         public Task StopConsuming(CancellationToken stoppingToken)
