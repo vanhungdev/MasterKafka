@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static Confluent.Kafka.ConfigPropertyNames;
 
 namespace MasterKafka.Kafka.Consumer
 {
@@ -32,6 +33,8 @@ namespace MasterKafka.Kafka.Consumer
             using (var consumer = new ConsumerBuilder<Ignore, string>(_kafkaConfig).Build())
             {
                 consumer.Subscribe(topic);
+                var partitionCount = consumer.Assignment.Count;
+
                 try
                 {
                     while (!stoppingToken.IsCancellationRequested)
@@ -39,11 +42,11 @@ namespace MasterKafka.Kafka.Consumer
                         // Đọc một batch message từ Kafka vào list
                         var batch = ReadMessageBatchFromKafka(consumer);
                         Console.WriteLine($"Batch {JsonConvert.SerializeObject(batch)}");
-                        Console.WriteLine($"Batch Count {batch.Count()} -- Topic{topic}");
+                        Console.WriteLine($"Batch Count {batch.Count()} -- Topic: {topic}");
                         Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}");
                         Console.WriteLine($"------------------------------------------");
 
-                        Parallel.ForEach(batch, new ParallelOptions { MaxDegreeOfParallelism = 5 },
+                        Parallel.ForEach(batch, new ParallelOptions { MaxDegreeOfParallelism = 10 },
                           msg => {
                               try
                               {
