@@ -107,7 +107,8 @@ namespace MasterKafka.Kafka.Consumer
                         batch.Add(result.Message.Value);    
                         consumer.Commit(result); // Commit offset
                         var offset = result.Offset;
-                        //Console.WriteLine($"Consumer offset: {offset}   || message: {result.Message.Value}");
+                        var partition = result.Partition;
+                        Console.WriteLine($"Consumer offset: {offset}   || partition: {partition}");
                     }
                 }
                 catch (ConsumeException ex)
