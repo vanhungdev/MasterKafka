@@ -1,7 +1,9 @@
-﻿using Confluent.Kafka;
+﻿using Akka.Streams.Dsl;
+using Confluent.Kafka;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -33,8 +35,21 @@ namespace MasterKafka.Kafka.Consumer
             using (var consumer = new ConsumerBuilder<Ignore, string>(_kafkaConfig).Build())
             {
                 consumer.Subscribe(topic);
-                var partitionCount = consumer.Assignment.Count;
+                // Lấy danh sách các partitions của topic
+                var partitions = consumer.Assignment;
+                ConsumePartition(consumer, stoppingToken, topic);
 
+                //Parallel.ForEach(partitions, partition =>
+                //{
+                //    ConsumePartition(partition, consumer, stoppingToken, topic);
+                //});
+            }
+        }
+        void ConsumePartition(IConsumer<Ignore, string> consumer, CancellationToken stoppingToken, string topic)
+        {
+            //Console.WriteLine($"Message from {partition}:");
+            while (true)
+            {
                 try
                 {
                     while (!stoppingToken.IsCancellationRequested)
@@ -47,7 +62,8 @@ namespace MasterKafka.Kafka.Consumer
                         Console.WriteLine($"------------------------------------------");
 
                         Parallel.ForEach(batch, new ParallelOptions { MaxDegreeOfParallelism = 10 },
-                          msg => {
+                          msg =>
+                          {
                               try
                               {
                                   Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}  || Thread {Thread.CurrentThread.ManagedThreadId} starting processing message: {msg}");
@@ -70,7 +86,6 @@ namespace MasterKafka.Kafka.Consumer
                 }
             }
         }
-
         /// <summary>
         /// 
         /// </summary>
