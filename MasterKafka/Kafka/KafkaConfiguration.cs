@@ -12,8 +12,8 @@ namespace MasterKafka.Kafka
             var consumerConfig = new ConsumerConfig
             {
                 BootstrapServers = "34.171.40.194:9092",
-                GroupId = null,
-                EnableAutoCommit = true,
+                GroupId = "SPF-group-01",
+                EnableAutoCommit = false,
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
             ConsumerConfig = consumerConfig;

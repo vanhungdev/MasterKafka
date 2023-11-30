@@ -34,6 +34,7 @@ namespace MasterKafka.Kafka.Consumer
             // Tạm thời chưa ghi log
             using (var consumer = new ConsumerBuilder<Ignore, string>(_kafkaConfig).Build())
             {
+                
                 consumer.Subscribe(topic);
                 // Lấy danh sách các partitions của topic
                 var partitions = consumer.Assignment;
@@ -66,7 +67,7 @@ namespace MasterKafka.Kafka.Consumer
                           {
                               try
                               {
-                                  Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}  || Thread {Thread.CurrentThread.ManagedThreadId} starting processing message: {msg}");
+                                  //Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}  || Thread {Thread.CurrentThread.ManagedThreadId} starting processing message: {msg}");
                                   _messageHandler(msg);
                               }
                               catch (Exception ex)
@@ -101,7 +102,7 @@ namespace MasterKafka.Kafka.Consumer
                 try
                 {
                     // Lấy message và add vào batch
-                    var result = consumer.Consume(TimeSpan.FromMilliseconds(100)); // Chờ 3s nếu k có message mới thì trả về null || 100*30 =3000 = 3
+                    var result = consumer.Consume(TimeSpan.FromMilliseconds(10)); // Chờ 3s nếu k có message mới thì trả về null || 100*30 =3000 = 3
                     if (result != null && result.Message != null && !string.IsNullOrEmpty(result.Message.Value))
                     {
                         batch.Add(result.Message.Value);    

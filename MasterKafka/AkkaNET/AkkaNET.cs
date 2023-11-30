@@ -42,10 +42,6 @@ namespace MasterKafka.AkkaNET
                 Console.WriteLine($"Thread {Task.CurrentId} is processing index {i}");
                 numbers[i]++;
             });
-
-
-
-
         }
     }
 }
