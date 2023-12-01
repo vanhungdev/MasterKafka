@@ -64,7 +64,8 @@ networks:
 	```	
 
 1. zookeeper contaier
-    ```docker run -d --name zookeeper --network kafka-net -p 2181:2181 wurstmeister/zookeeper
+    ```bash
+	docker run -d --name zookeeper --network kafka-net -p 2181:2181 wurstmeister/zookeeper
 	```	
 	
 1. Kafka contaier
