@@ -60,7 +60,7 @@ networks:
  `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`  
  localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
  
-2. **Kafdrop:**  
+2. **Kafdrop container:**  
  `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
  `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
 
