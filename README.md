@@ -143,7 +143,8 @@ cho phép người quản trị và người phát triển tương tác với Do
 	
 3. Tạo topic và partition:  
     ```bash
-    kafka-topics.sh --create --topic topic-events2 --partitions 5 --replication-factor 1 --bootstrap-server localhost:9092
+    kafka-topics.sh --create --topic topic-events2 --partitions 5 --replication-factor 1
+	--bootstrap-server localhost:9092
 	```	
 	
 4. Tăng số lượng partitions:  
