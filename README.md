@@ -1,11 +1,18 @@
 # MasterKafka
 
-MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi HungNV165. Dự án này là kết quả của sự nghiên cứu sâu sắc và triển khai chất lượng, được thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu trên nền tảng Kafka.
+MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi HungNV165.
+Dự án này là kết quả của sự nghiên cứu sâu sắc và triển khai chất lượng, được thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu trên nền tảng Kafka.
 
 
 ## Cài Đặt Kafka bằng docker
 
-Để cài đặt Akka.Streams.Kafka, bạn có thể sử dụng NuGet. Chạy lệnh sau trong Package Manager Console:
+Để sử dụng được Kafka cần chạy file docker compose sau:
+Có 3 container cần thiết sau:  
+
+1: zookeeper - quản lý Kafka
+2: kafka - kafka brocker
+3: kafdrop - công cụ theo dõi và quản lý khá cần thiết cho việc load test
+
 
 ```bash
 version: '3'
