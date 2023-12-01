@@ -2,7 +2,29 @@
 MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi HungNV165.
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.
 
+Thông tin Brocker Kafka đã có sẵn trên VPS  
+**Lưu ý:** Mạng công ty cần maphost mới truy cập được - VPN không cần 
 
+1. MapHost by pass proxy:  
+    ```bash
+    34.171.40.194 kafka-5
+	```	
+
+2. Kafdrop:  
+    ```bash
+    http://34.171.40.194:9091/
+	```	
+	
+3. portainer io:  
+    ```bash
+    http://34.171.40.194:9000/
+	```	
+
+3. BootStrap Server (mạng công ty không truy cập được, vpn có thể):  
+    ```bash
+    34.171.40.194:9092
+	```	
+	
 ## Cài Đặt Kafka bằng docker Compose:  
 
 **Để sử dụng được Kafka cần có 3 container cần thiết sau:**   
