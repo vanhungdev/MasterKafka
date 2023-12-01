@@ -1,8 +1,8 @@
-# Akka.Streams.Kafka
+# MasterKafka
 
-Akka.Streams.Kafka là một thư viện tích hợp Kafka cho Akka Streams, giúp bạn dễ dàng tích hợp và xử lý dữ liệu từ Kafka trong ứng dụng của bạn.
+MasterKafka là một dự án xử lý kafka một cách chuyên nghiệp do HuwngNV165 nguyên cứu và triển khai.
 
-## Cài Đặt
+## Cài Đặt Kafka bằng docker
 
 Để cài đặt Akka.Streams.Kafka, bạn có thể sử dụng NuGet. Chạy lệnh sau trong Package Manager Console:
 
