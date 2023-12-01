@@ -56,7 +56,7 @@ networks:
 
 ```
 
-**Cài đặt kafka bằng docker run từng contaier:**   
+**Cài đặt kafka bằng docker run từng contaier (cách khác nếu không muốn chạy compose):**   
 
 0. Tạo networks:  
     ```bash
