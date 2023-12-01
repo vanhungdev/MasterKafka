@@ -63,7 +63,7 @@ networks:
     docker network create kafka-net
 	```	
 
-1. zookeeper contaier:
+1. Zookeeper contaier:
     ```bash
 	docker run -d --name zookeeper --network kafka-net -p 2181:2181 wurstmeister/zookeeper
 	```	
@@ -77,7 +77,7 @@ networks:
 	KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 wurstmeister/kafka
     ```
 	
-1. kafdrop contaier:
+1. Kafdrop contaier:
     ```bash
     docker run -d --name kafdrop -p 9091:9000 -e
 	KAFKA_BROKERCONNECT=34.171.40.194:9092 -
