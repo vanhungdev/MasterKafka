@@ -4,7 +4,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 
 Thông tin Brocker Kafka đã có sẵn trên VPS có thể sử dụng.   
 
-**Lưu ý:** Mạng công ty cần maphost mới truy cập được - VPN không cần 
+**Lưu ý:** Mạng công ty cần maphost mới truy cập được Kafdrop và Portainer.io - Để dùng sever có sẵn thì dùng mạng thường hoặc VPN 
 
 1. MapHost by pass proxy (mạng công ty):  
     ```bash
@@ -16,7 +16,7 @@ Thông tin Brocker Kafka đã có sẵn trên VPS có thể sử dụng.
     http://34.171.40.194:9091/
 	```	
 	
-3. portainer io:  
+3. Portainer.io:  
     ```bash
     http://34.171.40.194:9000/
 	```	
