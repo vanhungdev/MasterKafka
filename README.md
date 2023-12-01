@@ -159,10 +159,10 @@ cho phép người quản trị và người phát triển tương tác với Do
 	```	
 6. Producer:  
     ```bash
-    kafka-console-producer.sh --topic events1 --bootstrap-server localhost:9092
+    kafka-console-producer.sh --topic topic-events2 --bootstrap-server localhost:9092
 	```		
 
 7. Consumer:  
     ```bash
-    kafka-console-consumer.sh --topic events1 --from-beginning --bootstrap-server localhost:9092
+    kafka-console-consumer.sh --topic topic-events2 --from-beginning --bootstrap-server localhost:9092
 	```	
