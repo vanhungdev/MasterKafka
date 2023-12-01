@@ -1,4 +1,6 @@
-﻿using Akka.Streams.Dsl;
+﻿using Akka.Configuration;
+using Akka.Streams.Dsl;
+using Akka.Streams.Implementation.Fusing;
 using Confluent.Kafka;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -8,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static Akka.Streams.Kafka.Metadata;
 using static Confluent.Kafka.ConfigPropertyNames;
 
 namespace MasterKafka.Kafka.Consumer
@@ -31,20 +34,18 @@ namespace MasterKafka.Kafka.Consumer
         /// <returns></returns>
         public async Task StartConsuming(string topic, CancellationToken stoppingToken)
         {
-            // Tạm thời chưa ghi log
-            using (var consumer = new ConsumerBuilder<Ignore, string>(_kafkaConfig).Build())
-            {
-                
-                consumer.Subscribe(topic);
-                // Lấy danh sách các partitions của topic
-                var partitions = consumer.Assignment;
-                ConsumePartition(consumer, stoppingToken, topic);
+            // Danh sách các topic cần subscribe
+            string[] topics = { topic };
 
-                //Parallel.ForEach(partitions, partition =>
-                //{
-                //    ConsumePartition(partition, consumer, stoppingToken, topic);
-                //});
-            }
+            // Tạo nhiều consumer instance
+            List<IConsumer<Ignore, string>> consumers = CreateConsumers(_kafkaConfig, topics, 5);
+
+            Parallel.ForEach(consumers, new ParallelOptions { MaxDegreeOfParallelism = 5 }, consumer =>
+            {
+                Console.WriteLine($"Start consum partition:");
+                ConsumePartition(consumer, stoppingToken, topic);
+            });
+
         }
         void ConsumePartition(IConsumer<Ignore, string> consumer, CancellationToken stoppingToken, string topic)
         {
@@ -57,10 +58,10 @@ namespace MasterKafka.Kafka.Consumer
                     {
                         // Đọc một batch message từ Kafka vào list
                         var batch = ReadMessageBatchFromKafka(consumer);
-                        Console.WriteLine($"Batch {JsonConvert.SerializeObject(batch)}");
-                        Console.WriteLine($"Batch Count {batch.Count()} -- Topic: {topic}");
-                        Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}");
-                        Console.WriteLine($"------------------------------------------");
+                        //Console.WriteLine($"Batch {JsonConvert.SerializeObject(batch)}");
+                        //Console.WriteLine($"Batch Count {batch.Count()} -- Topic: {topic}");
+                        //Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}");
+                        //Console.WriteLine($"------------------------------------------");
 
                         Parallel.ForEach(batch, new ParallelOptions { MaxDegreeOfParallelism = 10 },
                           msg =>
@@ -90,6 +91,26 @@ namespace MasterKafka.Kafka.Consumer
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="config"></param>
+        /// <param name="topics"></param>
+        /// <returns></returns>
+        List<IConsumer<Ignore, string>> CreateConsumers(ConsumerConfig config, string[] topics, int consumerInstance)
+        {
+            var consumers = new List<IConsumer<Ignore, string>>();
+            for (int i = 0; i < consumerInstance; i++)
+            {
+                var consumer = new ConsumerBuilder<Ignore, string>(config)
+                                  .SetErrorHandler((_, e) => { Console.WriteLine($"Error: {e.Reason}"); }).Build();
+
+                consumer.Subscribe(topics);
+                consumers.Add(consumer);
+            }
+            return consumers;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="consumer"></param>
         /// <returns></returns>
         List<string> ReadMessageBatchFromKafka(IConsumer<Ignore, string> consumer)
@@ -109,7 +130,7 @@ namespace MasterKafka.Kafka.Consumer
                         consumer.Commit(result); // Commit offset
                         var offset = result.Offset;
                         var partition = result.Partition;
-                        Console.WriteLine($"Consumer offset: {offset}   || partition: {partition}");
+                        Console.WriteLine($"Consumer offset: {offset}                || partition: {partition}");
                     }
                 }
                 catch (ConsumeException ex)
