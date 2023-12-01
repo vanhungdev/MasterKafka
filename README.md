@@ -9,3 +9,9 @@ MasterKafka là một dự án xử lý Apache Kafka được phát triển mộ
 
 ```bash
 Install-Package Akka.Streams.Kafka
+```
+
+## Cài Đặt Kafka bằng docker
+
+Để cài đặt Akka.Streams.Kafka, bạn có thể sử dụng NuGet. Chạy lệnh sau trong Package Manager Console:
+
