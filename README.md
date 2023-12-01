@@ -111,9 +111,11 @@ cho phép người quản trị và người phát triển tương tác với Do
 
 **Portainer:**  
 
-Kafdrop contaier:
+1. Kafdrop contaier:
     ```bash
-	docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+    docker run -d --name kafdrop -p 9091:9000 -e
+	KAFKA_BROKERCONNECT=34.171.40.194:9092 -
+	e JVM_OPTS="-Xms32M -Xmx64M" obsidiandynamics/kafdrop
     ```
 	
 	ád
