@@ -65,7 +65,8 @@ networks:
 
 1. zookeeper contaier
     ```docker run -d --name zookeeper --network kafka-net -p 2181:2181 wurstmeister/zookeeper
-```	
+	```	
+	
 1. Kafka contaier
     ```bash
     docker run -d --name kafka --network kafka-net -p 9092:9092 -e
@@ -73,7 +74,6 @@ networks:
 	KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT -e
 	KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e
 	KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 wurstmeister/kafka
-
     ```
 	
 1. kafdrop contaier
