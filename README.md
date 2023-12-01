@@ -1,19 +1,10 @@
-Producer
-A producer publishes messages to Kafka topics. The message itself contains information about what topic and partition to publish to so you can publish to different topics with the same producer.
+# Akka.Streams.Kafka
 
-Settings
-When creating a producer stream you need to pass in ProducerSettings that defines things like:
+Akka.Streams.Kafka là một thư viện tích hợp Kafka cho Akka Streams, giúp bạn dễ dàng tích hợp và xử lý dữ liệu từ Kafka trong ứng dụng của bạn.
 
-bootstrap servers of the Kafka cluster
-serializers for the keys and values
-tuning parameters
-var producerSettings = ProducerSettings<Null, string>.Create(system, null, null)
-    .WithBootstrapServers("localhost:9092");
+## Cài Đặt
 
-// OR you can use Config instance
-var config = system.Settings.Config.GetConfig("akka.kafka.producer");
-var producerSettings = ProducerSettings<Null, string>.Create(config, null, null)
-    .WithBootstrapServers("localhost:9092");
-NOTE:
+Để cài đặt Akka.Streams.Kafka, bạn có thể sử dụng NuGet. Chạy lệnh sau trong Package Manager Console:
 
-Specifying null as a key/value serializer uses default serializer for key/value type. Built-in serializers are available in Confluent.Kafka.Serializers class.
+```bash
+Install-Package Akka.Streams.Kafka
