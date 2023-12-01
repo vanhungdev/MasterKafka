@@ -16,43 +16,43 @@ Tạo file docker Compose có tên `docker-compose.yaml` như sau:
 
 
 ```bash
-version: '3'
-services:
-  zookeeper:
-    image: wurstmeister/zookeeper
-    container_name: zookeeper
-    networks:
-      - kafka-net
-    ports:
-      - "2181:2181"
+	version: '3'
+	services:
+	  zookeeper:
+		image: wurstmeister/zookeeper
+		container_name: zookeeper
+		networks:
+		  - kafka-net
+		ports:
+		  - "2181:2181"
 
-  kafka:
-    image: wurstmeister/kafka
-    container_name: kafka
-    networks:
-      - kafka-net
-    ports:
-      - "9092:9092"
-    environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+	  kafka:
+		image: wurstmeister/kafka
+		container_name: kafka
+		networks:
+		  - kafka-net
+		ports:
+		  - "9092:9092"
+		environment:
+		  KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092
+		  KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+		  KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+		  KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    container_name: kafdrop
-    ports:
-      - "9091:9000"
-    environment:
-      KAFKA_BROKERCONNECT: 34.171.40.194:9092
-      JVM_OPTS: "-Xms32M -Xmx64M"
-    depends_on:
-      - kafka
+	  kafdrop:
+		image: obsidiandynamics/kafdrop
+		container_name: kafdrop
+		ports:
+		  - "9091:9000"
+		environment:
+		  KAFKA_BROKERCONNECT: 34.171.40.194:9092
+		  JVM_OPTS: "-Xms32M -Xmx64M"
+		depends_on:
+		  - kafka
 
-networks:
-  kafka-net:
-    driver: bridge
+	networks:
+	  kafka-net:
+		driver: bridge
 
 ```
 
