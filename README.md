@@ -64,7 +64,7 @@ networks:
  `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
  `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
 
-## Cài Đặt Kafka bằng docker
+## Cài Đặt Kafka bằng docker Compose:  
 
 Để cài đặt Akka.Streams.Kafka, bạn có thể sử dụng NuGet. Chạy lệnh sau trong Package Manager Console:
 
