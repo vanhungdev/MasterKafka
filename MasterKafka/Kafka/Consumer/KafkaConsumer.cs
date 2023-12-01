@@ -130,7 +130,7 @@ namespace MasterKafka.Kafka.Consumer
                         consumer.Commit(result); // Commit offset
                         var offset = result.Offset;
                         var partition = result.Partition;
-                        Console.WriteLine($"Consumer offset: {offset}                || partition: {partition}");
+                        Console.WriteLine($"Consumer offset: {offset}                || partition: {partition} -- {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}");
                     }
                 }
                 catch (ConsumeException ex)
