@@ -6,8 +6,7 @@ Dự án này là kết quả của sự nghiên cứu sâu sắc và triển kh
 
 ## Cài Đặt Kafka bằng docker
 
-Để sử dụng được Kafka cần chạy file docker compose sau:
-**Có 3 container cần thiết sau:**   
+**Để sử dụng được Kafka cần có 3 container cần thiết sau:**   
 
 1. **Zookeeper** - Quản lý Kafka
 
