@@ -240,27 +240,13 @@ Concep:
 1. Hướng dẫn sử dụng : 
 
     ```bash
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="topic"></param>
-        /// <param name="stoppingToken"></param>
-        /// <returns></returns>
-        public async Task StartConsuming(string topic, CancellationToken stoppingToken)
-        {
-            // Danh sách các topic cần subscribe
-            string[] topics = { topic };
+	
+            var topic5 = "events5";
+            // More Topic
 
-            // Tạo nhiều consumer instance
-            List<IConsumer<Ignore, string>> consumers = CreateConsumers(_kafkaConfig, topics, 5);
-
-            Parallel.ForEach(consumers, new ParallelOptions { MaxDegreeOfParallelism = 5 }, consumer =>
-            {
-                Console.WriteLine($"Start consum partition:");
-                ConsumePartition(consumer, stoppingToken, topic);
-            });
-
-        }
+            _consumerManager.AddConsumer(topic1, 
+                message => { _orderProcess.CreateOrderProcess(message, topic1); return Task.CompletedTask; }, 
+                KafkaConfiguration.ConsumerConfig); // Configuration can be changed
 	```	
 
 	Giải thích
