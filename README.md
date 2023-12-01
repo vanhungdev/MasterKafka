@@ -110,7 +110,7 @@ networks:
  `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
  `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
 
-## Công cụ quản lý container:  
+## Công cụ quản lý container (option):  
 
 Portainer là một công cụ quản lý Docker dựa trên giao diện web, giúp bạn dễ dàng quản lý và giám sát các container Docker trên một hoặc nhiều máy chủ. 
 Portainer cung cấp một giao diện người dùng đồ họa thân thiện, 
@@ -128,4 +128,39 @@ cho phép người quản trị và người phát triển tương tác với Do
     ```bash
     http://localhost:9000
     ```
-	da
+	
+## Truy cập và quản lý topic Kafka:
+
+1. exec vào contaier:  
+    ```bash
+    docker exec -it kafka /bin/bash
+	```	
+
+2. Tạo topic:  
+    ```bash
+    kafka-topics.sh --create --topic topic-events1 --bootstrap-server localhost:9092
+	```	
+	
+3. Tạo topic và partition:  
+    ```bash
+    kafka-topics.sh --create --topic topic-events2 --partitions 5 --replication-factor 1 --bootstrap-server localhost:9092
+	```	
+	
+4. Tăng số lượng partitions:  
+    ```bash
+    kafka-topics.sh --bootstrap-server localhost:9092 --topic topic-events2 --alter --partitions 3
+	```		
+
+5. Xem mô tả topic:  
+    ```bash
+    kafka-topics.sh --bootstrap-server localhost:9092 --topic topic-events2 --describe
+	```	
+6. Producer:  
+    ```bash
+    kafka-console-producer.sh --topic events1 --bootstrap-server localhost:9092
+	```		
+
+7. Consumer:  
+    ```bash
+    kafka-console-consumer.sh --topic events1 --from-beginning --bootstrap-server localhost:9092
+	```	
