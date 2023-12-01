@@ -3,6 +3,7 @@ MasterKafka là một dự án xử lý Apache Kafka được phát triển mộ
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.
 
 Thông tin Brocker Kafka đã có sẵn trên VPS có thể sử dụng.   
+
 **Lưu ý:** Mạng công ty cần maphost mới truy cập được - VPN không cần 
 
 1. MapHost by pass proxy (mạng công ty):  
