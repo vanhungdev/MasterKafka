@@ -4,7 +4,7 @@ MasterKafka là một dự án xử lý Apache Kafka được phát triển mộ
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.
 
 
-## Cài Đặt Kafka bằng docker
+## Cài Đặt Kafka bằng docker Compose:  
 
 **Để sử dụng được Kafka cần có 3 container cần thiết sau:**   
 
