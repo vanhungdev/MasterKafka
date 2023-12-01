@@ -81,8 +81,7 @@ networks:
 ```
 
  **Chạy Docker Compose:**  
-  **Lưu ý:**  
-Để trình chạy file docker compose không gặp lỗi thì chú ý các mục sau:  
+  **Lưu ý:** Để trình chạy file docker compose không gặp lỗi thì chú ý các mục sau:  
 
 1. chú ý port đã bị chiếm trong hệ thống chưa: 2181,9092,9091.  
 2. chú ý container_name đã có chưa: zookeeper, kafka, kafdrop.  
