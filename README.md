@@ -12,7 +12,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 2. **Kafka** - Kafka Broker
 3. **Kafdrop** - Công cụ theo dõi và quản lý cần thiết cho việc load test  
 
-Tạo file docker Compose có tên docker-compose.yaml như sau:  
+Tạo file docker Compose có tên `docker-compose.yaml` như sau:  
 
 
 ```bash
