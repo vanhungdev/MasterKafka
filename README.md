@@ -262,7 +262,7 @@ Concep:
 
         }
 	```	
-	
+1. Xử lý code : 
 	   ```bash
               void ConsumePartition(IConsumer<Ignore, string> consumer, CancellationToken stoppingToken, string topic)
         {
