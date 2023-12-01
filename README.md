@@ -86,7 +86,7 @@ networks:
 1. Chú ý `port` đã bị chiếm trong hệ thống chưa: 2181,9092,9091.  
 2. Chú ý `container_name` đã có chưa: zookeeper, kafka, kafdrop.  
 3. Chú ý `networks` đã có chưa: kafka-net.  
-4. Chú ý cấu hình các `biến môi trường` cho đúng.  
+4. Chú ý cấu hình các `environment` (biến môi trường) cho đúng.  
  
  Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:  
  
