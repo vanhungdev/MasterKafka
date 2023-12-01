@@ -241,12 +241,13 @@ Concep:
 
     ```bash
 	
-            var topic5 = "events5";
-            // More Topic
+var topic5 = "events5";
+// More Topic
 
-            _consumerManager.AddConsumer(topic5, 
-                message => { _orderProcess.CreateOrderProcess(message, topic5); return Task.CompletedTask; }, 
-                KafkaConfiguration.ConsumerConfig); // Configuration can be changed
+_consumerManager.AddConsumer(topic5, 
+message => { _orderProcess.CreateOrderProcess(message, topic5); return Task.CompletedTask; }, 
+KafkaConfiguration.ConsumerConfig); // Configuration can be changed
+
 	```	
 
 	Giải thích
