@@ -55,12 +55,12 @@ networks:
 ```
 **Lưu lý các biến môi trường sau:**   
 
-1. **Kafka container**
+1. **Kafka container:**  
  `KAFKA_ADVERTISED_LISTENERS` nếu dùng host VPS thì để ip như sau:
  `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`  
  localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
  
-2. **Kafdrop**  
+2. **Kafdrop:**  
  `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
  `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
 
