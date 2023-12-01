@@ -61,7 +61,7 @@ networks:
 0. Tạo networks:  
     ```bash
     docker network create kafka-net
-```	
+	```	
 
 1. zookeeper contaier
     ```docker run -d --name zookeeper --network kafka-net -p 2181:2181 wurstmeister/zookeeper
@@ -99,22 +99,3 @@ networks:
 
 Để cài đặt Akka.Streams.Kafka, bạn có thể sử dụng NuGet. Chạy lệnh sau trong Package Manager Console:
 
-
-
-
-Để sử dụng Kafka, bạn cần chạy Docker Compose với 3 container cần thiết:
-
-1. <span style="color:red">Zookeeper</span> - Quản lý Kafka
-    ```bash
-    docker run -d --name zookeeper wurstmeister/zookeeper
-    ```
-
-2. <span style="color:blue">Kafka</span> - Kafka Broker
-    ```bash
-    docker run -d --name kafka --network kafka-net -p 9092:9092 \
-        -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092 \
-        -e KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT \
-        -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \
-        -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
-        wurstmeister/kafka
-    ```
