@@ -10,7 +10,9 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 
 1. **Zookeeper** - Quản lý Kafka
 2. **Kafka** - Kafka Broker
-3. **Kafdrop** - Công cụ theo dõi và quản lý cần thiết cho việc load test
+3. **Kafdrop** - Công cụ theo dõi và quản lý cần thiết cho việc load test  
+
+Tạo file docker Compose có tên docker-compose.yaml như sau:  
 
 
 ```bash
@@ -87,13 +89,3 @@ networks:
         -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
         wurstmeister/kafka
     ```
-
-3. <span style="color:green">Kafdrop</span> - Công cụ theo dõi và quản lý, khá cần thiết cho việc load test
-    ```bash
-    docker run -d --name kafdrop --network kafka-net -p 9000:9000 \
-        -e KAFKA_BROKERCONNECT=kafka:9092 \
-        -e JVM_OPTS="-Xms32M -Xmx64M" \
-        obsidiandynamics/kafdrop
-    ```
-
-Lưu ý rằng các lệnh trên sử dụng Docker Compose để triển khai các container. Đảm bảo bạn đã cài đặt Docker và Docker Compose trước khi chạy các lệnh trên.
