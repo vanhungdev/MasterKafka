@@ -70,6 +70,19 @@ networks:
   http://localhost:9091
  ```
  
+ 	
+**Lưu lý các biến môi trường sau:**   
+
+1. **Kafka container:**  
+ `KAFKA_ADVERTISED_LISTENERS` nếu dùng host VPS thì để ip như sau:
+ `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`  
+ localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
+ 
+2. **Kafdrop container:**  
+ `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
+ `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
+
+ 
 ## Cài đặt kafka bằng docker run từng contaier (cách khác nếu không muốn chạy compose):
 
 0. Tạo networks:  
@@ -99,17 +112,6 @@ networks:
     ```
 	
 	
-**Lưu lý các biến môi trường sau:**   
-
-1. **Kafka container:**  
- `KAFKA_ADVERTISED_LISTENERS` nếu dùng host VPS thì để ip như sau:
- `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`  
- localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
- 
-2. **Kafdrop container:**  
- `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
- `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
-
 ## Công cụ quản lý container (option):  
 
 Portainer là một công cụ quản lý Docker dựa trên giao diện web, giúp bạn dễ dàng quản lý và giám sát các container Docker trên một hoặc nhiều máy chủ. 
