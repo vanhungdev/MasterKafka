@@ -63,7 +63,7 @@ networks:
     docker-compose up -d
 	```	
 	
-**Cài đặt kafka bằng docker run từng contaier (cách khác nếu không muốn chạy compose):**   
+## Cài đặt kafka bằng docker run từng contaier (cách khác nếu không muốn chạy compose):
 
 0. Tạo networks:  
     ```bash
