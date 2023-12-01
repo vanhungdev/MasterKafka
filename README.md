@@ -249,12 +249,6 @@ Concep:
                 KafkaConfiguration.ConsumerConfig); // Configuration can be changed
 				
 				
-			/// <summary>
-			/// Nhớ try catch when DeserializeObject
-			/// Cẩn thận exception là dừng thread
-			/// </summary>
-			/// <param name="message"></param>
-			/// <param name="topic"></param>
 			public async void CreateOrderProcess(string message, string topic)
 			{
 				try
