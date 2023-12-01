@@ -59,9 +59,7 @@ networks:
  **Chạy Docker Compose:**  
  Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:
 
-    ```bash
-    docker-compose up -d
-	```	
+  docker-compose up -d
 	
 ## Cài đặt kafka bằng docker run từng contaier (cách khác nếu không muốn chạy compose):
 
