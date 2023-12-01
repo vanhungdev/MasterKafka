@@ -57,6 +57,7 @@ networks:
 ```
 
  **Chạy Docker Compose:**  
+ 
  Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:  
  
  ```bash
