@@ -166,3 +166,22 @@ cho phép người quản trị và người phát triển tương tác với Do
     ```bash
     kafka-console-consumer.sh --topic topic-events2 --from-beginning --bootstrap-server localhost:9092
 	```	
+	
+## Xử lý code Producer:
+
+ Mô tả ở đây: 
+
+Concep:
+
+ 
+1. Curl push mesage:  
+    ```bash
+    curl --location 'http://localhost:5001/Home/Privacy' \
+	--header 'Content-Type: application/json' \
+	--data '{
+				"id": 1,
+				"Name": "hung"
+			}'
+	```	
+	
+	ádasd
