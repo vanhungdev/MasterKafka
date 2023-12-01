@@ -103,7 +103,16 @@ networks:
  `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
  `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
 
-## Cài Đặt Kafka bằng docker Compose:  
+## Công cụ quản lý container:  
 
-Để cài đặt Akka.Streams.Kafka, bạn có thể sử dụng NuGet. Chạy lệnh sau trong Package Manager Console:
+Portainer là một công cụ quản lý Docker dựa trên giao diện web, giúp bạn dễ dàng quản lý và giám sát các container Docker trên một hoặc nhiều máy chủ. 
+Portainer cung cấp một giao diện người dùng đồ họa thân thiện, 
+cho phép người quản trị và người phát triển tương tác với Docker mà không cần sử dụng các lệnh dòng lệnh phức tạp.
 
+2. **Portainer:**  
+
+Cài Portainer  
+   ```bash
+    docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
+    ```
+	
