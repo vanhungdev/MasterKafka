@@ -55,6 +55,35 @@ networks:
     driver: bridge
 
 ```
+
+**Cài đặt kafka bằng docker run từng contaier:**   
+
+0. Tạo networks:  
+    ```bash
+    docker network create kafka-net
+```	
+
+1. zookeeper contaier
+    ```docker run -d --name zookeeper --network kafka-net -p 2181:2181 wurstmeister/zookeeper
+```	
+1. Kafka contaier
+    ```bash
+    docker run -d --name kafka --network kafka-net -p 9092:9092 -e
+	KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://34.171.40.194:9092 -e
+	KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT -e
+	KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e
+	KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 wurstmeister/kafka
+
+    ```
+	
+1. kafdrop contaier
+    ```bash
+    docker run -d --name kafdrop -p 9091:9000 -e
+	KAFKA_BROKERCONNECT=34.171.40.194:9092 -
+	e JVM_OPTS="-Xms32M -Xmx64M" obsidiandynamics/kafdrop
+    ```
+	
+	
 **Lưu lý các biến môi trường sau:**   
 
 1. **Kafka container:**  
