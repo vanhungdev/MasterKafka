@@ -5,7 +5,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 Thông tin Brocker Kafka đã có sẵn trên VPS có thể sử dụng.   
 **Lưu ý:** Mạng công ty cần maphost mới truy cập được - VPN không cần 
 
-1. MapHost by pass proxy:  
+1. MapHost by pass proxy (mạng công ty):  
     ```bash
     34.171.40.194 kafka-5s
 	```	
