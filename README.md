@@ -18,6 +18,9 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 3. Portainer.io:  
     ```bash
     http://34.171.40.194:9000/
+	
+	Username: admin
+	Password: Provanhung77
 	```	
 
 3. BootstrapServers (mạng công ty không truy cập được, vpn có thể):  
