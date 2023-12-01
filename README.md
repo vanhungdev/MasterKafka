@@ -7,17 +7,13 @@ Dự án này là kết quả của sự nghiên cứu sâu sắc và triển kh
 ## Cài Đặt Kafka bằng docker
 
 Để sử dụng được Kafka cần chạy file docker compose sau:
-Có 3 container cần thiết sau:  
+**Có 3 container cần thiết sau:**   
 
 1. **Zookeeper** - Quản lý Kafka
-   - Mô tả về Zookeeper và vai trò của nó.
 
 2. **Kafka** - Kafka Broker
-   - Mô tả về Kafka Broker và vai trò của nó.
 
 3. **Kafdrop** - Công cụ theo dõi và quản lý cần thiết cho việc load test
-   - Mô tả về Kafdrop và các tính năng quan trọng.
-
 
 
 ```bash
