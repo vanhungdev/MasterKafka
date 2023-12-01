@@ -237,7 +237,7 @@ Concep:
      }'
 	```	
 	
-1. Xử lý code : 
+1. Hướng dẫn sử dụng : 
 
     ```bash
         /// <summary>
