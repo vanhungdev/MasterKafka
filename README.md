@@ -63,6 +63,12 @@ networks:
   docker-compose up -d
  ```
  
+  Truy cập Kafdrop:  
+ 
+ ```bash
+  http://localhost:9091
+ ```
+ 
 ## Cài đặt kafka bằng docker run từng contaier (cách khác nếu không muốn chạy compose):
 
 0. Tạo networks:  
