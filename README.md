@@ -177,11 +177,11 @@ Concep:
 1. Curl push mesage:  
     ```bash
     curl --location 'http://localhost:5001/Home/Privacy' \
-	--header 'Content-Type: application/json' \
-	--data '{
-				"id": 1,
-				"Name": "hung"
-			}'
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+       "id": 1,
+       "Name": "hung"
+     }'
 	```	
 	
 	ádasd
