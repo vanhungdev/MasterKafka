@@ -55,7 +55,7 @@ networks:
 ```
 **Lưu lý các biến môi trường sau:**   
 
-1. **kafka config** - Quản lý Kafka
+1. **Kafka container** - Quản lý Kafka
  `KAFKA_ADVERTISED_LISTENERS` nếu dùng host VPS thì để ip như sau:
  `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`  
  localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
