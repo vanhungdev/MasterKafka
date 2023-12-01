@@ -15,7 +15,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 Tạo file docker Compose có tên `docker-compose.yaml` như sau:  
 
 
-```bash
+	```bash
 	version: '3'
 	services:
 	  zookeeper:
@@ -54,7 +54,7 @@ Tạo file docker Compose có tên `docker-compose.yaml` như sau:
 	  kafka-net:
 		driver: bridge
 
-```
+	```
 
 **Cài đặt kafka bằng docker run từng contaier:**   
 
