@@ -9,9 +9,7 @@ Dự án này là kết quả của sự nghiên cứu sâu sắc và triển kh
 **Để sử dụng được Kafka cần có 3 container cần thiết sau:**   
 
 1. **Zookeeper** - Quản lý Kafka
-
 2. **Kafka** - Kafka Broker
-
 3. **Kafdrop** - Công cụ theo dõi và quản lý cần thiết cho việc load test
 
 
