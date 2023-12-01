@@ -55,7 +55,20 @@ networks:
 ```
 **Lưu lý các biến môi trường sau:**   
 
-
+1. **Zookeeper** - Quản lý Kafka
+ `KAFKA_ADVERTISED_LISTENERS` nếu dùng host VPS thì để ip như sau
+ `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`
+ local: KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+ 
+2. **Zookeeper** - Quản lý Kafka
+ ```bash
+    docker run -d --name zookeeper wurstmeister/zookeeper
+    ```
+	
+3. **Zookeeper** - Quản lý Kafka
+ ```bash
+    docker run -d --name zookeeper wurstmeister/zookeeper
+    ```
 
 ## Cài Đặt Kafka bằng docker
 
