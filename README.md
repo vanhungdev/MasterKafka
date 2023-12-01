@@ -218,3 +218,93 @@ Concep:
 	```	
 	
 	Giải thích
+	
+	
+	## Xử lý code Consumer:
+
+ Mô tả ở đây: 
+
+Concep:
+
+ 
+1. Curl push mesage:  
+    ```bash
+    curl --location 'http://localhost:5001/Home/Privacy' \
+     --header 'Content-Type: application/json' \
+     --data-raw '{
+       "id": 1,
+       "Name": "hung"
+     }'
+	```	
+	
+1. Xử lý code : 
+
+    ```bash
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="topic"></param>
+        /// <param name="stoppingToken"></param>
+        /// <returns></returns>
+        public async Task StartConsuming(string topic, CancellationToken stoppingToken)
+        {
+            // Danh sách các topic cần subscribe
+            string[] topics = { topic };
+
+            // Tạo nhiều consumer instance
+            List<IConsumer<Ignore, string>> consumers = CreateConsumers(_kafkaConfig, topics, 5);
+
+            Parallel.ForEach(consumers, new ParallelOptions { MaxDegreeOfParallelism = 5 }, consumer =>
+            {
+                Console.WriteLine($"Start consum partition:");
+                ConsumePartition(consumer, stoppingToken, topic);
+            });
+
+        }
+	```	
+	
+	   ```bash
+              void ConsumePartition(IConsumer<Ignore, string> consumer, CancellationToken stoppingToken, string topic)
+        {
+            //Console.WriteLine($"Message from {partition}:");
+            while (true)
+            {
+                try
+                {
+                    while (!stoppingToken.IsCancellationRequested)
+                    {
+                        // Đọc một batch message từ Kafka vào list
+                        var batch = ReadMessageBatchFromKafka(consumer);
+                        //Console.WriteLine($"Batch {JsonConvert.SerializeObject(batch)}");
+                        //Console.WriteLine($"Batch Count {batch.Count()} -- Topic: {topic}");
+                        //Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}");
+                        //Console.WriteLine($"------------------------------------------");
+
+                        Parallel.ForEach(batch, new ParallelOptions { MaxDegreeOfParallelism = 10 },
+                          msg =>
+                          {
+                              try
+                              {
+                                  //Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}  || Thread {Thread.CurrentThread.ManagedThreadId} starting processing message: {msg}");
+                                  _messageHandler(msg);
+                              }
+                              catch (Exception ex)
+                              {
+                                  Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} | Exception handler: {ex.Message} | message: {msg} | Topic {topic}:");
+                              }
+                          });
+                    }
+                }
+                catch (OperationCanceledException oe)
+                {
+                    string exceptionMessage = oe.Message;
+                }
+                finally
+                {
+                    consumer.Close();
+                }
+            }
+        }
+	```	
+	
+	Giải thích
