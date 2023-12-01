@@ -9,7 +9,7 @@ Dự án này là kết quả của sự nghiên cứu sâu sắc và triển kh
 Để sử dụng được Kafka cần chạy file docker compose sau:
 Có 3 container cần thiết sau:  
 
-1: zookeeper - quản lý Kafka
+1: zookeeper - quản lý Kafka \n
 2: kafka - kafka brocker
 3: kafdrop - công cụ theo dõi và quản lý khá cần thiết cho việc load test
 
