@@ -20,7 +20,7 @@ Thông tin Brocker Kafka đã có sẵn trên VPS có thể sử dụng.
     http://34.171.40.194:9000/
 	```	
 
-3. BootStrap Server (mạng công ty không truy cập được, vpn có thể):  
+3. BootstrapServers (mạng công ty không truy cập được, vpn có thể):  
     ```bash
     34.171.40.194:9092
 	```	
