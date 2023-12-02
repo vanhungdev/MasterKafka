@@ -104,7 +104,7 @@ networks:
 **Lưu lý các biến môi trường sau:**   
 
 1. **Kafka container:**  
- `KAFKA_ADVERTISED_LISTENERS` Nếu dùng host VPS thì để IP như sau:  
+ `KAFKA_ADVERTISED_LISTENERS` Nếu dùng host VPS thì để IP như sau:      
  `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`.   
  Với localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
  
@@ -114,7 +114,7 @@ networks:
  Với localhost thì `KAFKA_BROKERCONNECT: localhost:9092`.
 
  
-## Cài đặt kafka bằng docker run từng container (cách khác nếu không muốn chạy compose):
+## Cài đặt Kafka bằng docker run từng container (cách khác nếu không muốn chạy compose):
 
 0. Tạo networks:  
     ```bash
