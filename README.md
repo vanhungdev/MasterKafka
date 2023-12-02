@@ -142,11 +142,11 @@ networks:
 	
 1. Kafdrop container:
     ```bash
-    docker run -d --name kafdrop -p 9091:9000 -e
-	KAFKA_BROKERCONNECT=localhost:9092 -
+    docker run -d --name kafdrop -p 9091:9000 -e \
+	KAFKA_BROKERCONNECT=localhost:9092 - \
 	e JVM_OPTS="-Xms32M -Xmx64M" obsidiandynamics/kafdrop
     ```
-	
+	Kafdrop chưa có cho macbook m1 pro
 	
 ## Công cụ quản lý container (option):  
 
