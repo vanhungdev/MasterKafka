@@ -217,7 +217,7 @@ Concep:
 1. Producer hàng loạt: 
 
     ```csharp
-	var config1 = new ProducerConfig
+	var config = new ProducerConfig
 	{
 		BootstrapServers = "34.171.40.194:9092"
 	};
@@ -237,7 +237,7 @@ Concep:
 			};
 
 			// Gọi hàm produce message theo từng topic
-			_messageBroker.ProducePushMessage(topic, config1, message, message.Value);
+			_messageBroker.ProducePushMessage(topic, config, message, message.Value);
 		}
 	});
 
