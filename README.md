@@ -158,7 +158,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 
 1. Cài đặt Portainer:
     ```bash
-    docker run -d -p 9000:9000 --name=portainer --restart=always -v
+    docker run -d -p 9000:9000 --name=portainer --restart=always -v \
 	/var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
     ```
 	
@@ -184,7 +184,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 	
 3. Tạo topic và partition:  
     ```bash
-    kafka-topics.sh --create --topic topic-events2 --partitions 5 --replication-factor 1
+    kafka-topics.sh --create --topic topic-events2 --partitions 5 --replication-factor 1 \
 	--bootstrap-server localhost:9092
 	```	
 	
