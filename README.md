@@ -87,7 +87,7 @@ networks:
 2. Chú ý `container_name` đã có chưa: `zookeeper`, `kafka`, `kafdrop`.  
 3. Chú ý `networks` đã có chưa: `kafka-net`.  
 4. Chú ý cấu hình các `environment` (biến môi trường) phù hợp.  
- 
+5. Chú ý nếu gặp lỗi `The requested image's platform` thì điều chỉnh `image` lại cho phù hợp với platform cảu bạn.
  Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:  
  
  ```bash
