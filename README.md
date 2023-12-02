@@ -3,7 +3,7 @@ MasterKafka là một dự án xử lý Apache Kafka được phát triển mộ
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.
 
 **Thông tin Brocker Kafka đã có sẵn trên VPS có thể sử dụng.**   
-**Lưu ý:** Mạng công ty cần maphost mới truy cập được Kafdrop và Portainer.io - Để dùng sever có sẵn thì dùng mạng thường hoặc VPN 
+**Lưu ý:** Mạng công ty cần maphost mới truy cập được Kafdrop và Portainer - Để dùng sever có sẵn thì dùng mạng thường hoặc VPN 
 
 1. MapHost by pass proxy (mạng công ty):  
     ```bash
@@ -15,7 +15,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
     http://34.171.40.194:9091/
 	```	
 	
-3. Portainer.io:  
+3. Portainer:  
     ```bash
     http://34.171.40.194:9000/
 	
@@ -28,12 +28,12 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
     34.171.40.194:9092
 	```	
 	
-## Cài Đặt Kafka bằng docker Compose:  
+## Cài Đặt Kafka bằng docker compose:  
 
 **Để sử dụng được Kafka cần có 3 container cần thiết sau:**   
 
 1. **Zookeeper** - Quản lý Kafka
-2. **Kafka** - Kafka Broker
+2. **Kafka** - Kafka broker
 3. **Kafdrop** - Công cụ theo dõi và quản lý cần thiết cho việc load test  
 
 Tạo file docker Compose có tên `docker-compose.yaml` như sau:  
@@ -58,7 +58,7 @@ services:
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -69,7 +69,7 @@ services:
     ports:
       - "9091:9000"
     environment:
-      KAFKA_BROKERCONNECT: 34.171.40.194:9092
+      KAFKA_BROKERCONNECT: localhost:9092
       JVM_OPTS: "-Xms32M -Xmx64M"
     depends_on:
       - kafka
@@ -86,7 +86,7 @@ networks:
 1. Chú ý `port` đã bị chiếm trong hệ thống chưa: `2181`, `9092`, `9091`.  
 2. Chú ý `container_name` đã có chưa: `zookeeper`, `kafka`, `kafdrop`.  
 3. Chú ý `networks` đã có chưa: `kafka-net`.  
-4. Chú ý cấu hình các `environment` (biến môi trường) cho đúng.  
+4. Chú ý cấu hình các `environment` (biến môi trường) phù hợp.  
  
  Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:  
  
@@ -104,13 +104,13 @@ networks:
 **Lưu lý các biến môi trường sau:**   
 
 1. **Kafka container:**  
- `KAFKA_ADVERTISED_LISTENERS` nếu dùng host VPS thì để ip như sau:
- `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`  
- localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
+ `KAFKA_ADVERTISED_LISTENERS` Nếu dùng host VPS thì để IP như sau:
+ `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`   
+ Với localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
  
 2. **Kafdrop container:**  
  `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
- `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
+ `KAFKA_BROKERCONNECT: localhost:9092` dùng ip của VPS
 
  
 ## Cài đặt kafka bằng docker run từng container (cách khác nếu không muốn chạy compose):
