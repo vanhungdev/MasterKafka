@@ -162,7 +162,10 @@ cho phép người quản trị và người phát triển tương tác với Do
     http://localhost:9000
     ```
 	
-## Truy cập và quản lý topic Kafka:
+## Truy cập và quản lý topic Kafka:  
+ 
+ Để sử dụng được kafka cũng ta cần kiểm tra xem container đã run chưa và cấu hình thêm topic cho nó. Cấu hình các partitions để xử linh hoạt hơn.  
+ Nếu không rành gõ lệnh các bạn có thể cấu hình trực tiếp bằng `Kafdrop` 
 
 1. exec vào contaier:  
     ```bash
