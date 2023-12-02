@@ -23,7 +23,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 	Password: Provanhung77
 	```	
 
-3. BootstrapServers (mạng công ty không truy cập được, vpn có thể):  
+3. BootstrapServers (mạng công ty không truy cập được, mạng thường và VPN thì có thể):  
     ```bash
     34.171.40.194:9092
 	```	
@@ -109,8 +109,8 @@ networks:
  Với localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
  
 2. **Kafdrop container:**  
- `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:
- `KAFKA_BROKERCONNECT: localhost:9092` dùng ip của VPS
+ `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:  
+ `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
 
  
 ## Cài đặt kafka bằng docker run từng container (cách khác nếu không muốn chạy compose):
@@ -128,7 +128,7 @@ networks:
 1. Kafka container:
     ```bash
     docker run -d --name kafka --network kafka-net -p 9092:9092 -e
-	KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://34.171.40.194:9092 -e
+	KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -e
 	KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT -e
 	KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e
 	KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 wurstmeister/kafka
@@ -137,7 +137,7 @@ networks:
 1. Kafdrop container:
     ```bash
     docker run -d --name kafdrop -p 9091:9000 -e
-	KAFKA_BROKERCONNECT=34.171.40.194:9092 -
+	KAFKA_BROKERCONNECT=localhost:9092 -
 	e JVM_OPTS="-Xms32M -Xmx64M" obsidiandynamics/kafdrop
     ```
 	
