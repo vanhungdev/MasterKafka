@@ -7,7 +7,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 
 1. MapHost by pass proxy (mạng công ty):  
     ```bash
-    34.171.40.194 kafka-5s
+    34.171.40.194 master-kafka-01
 	```	
 
 2. Kafdrop:  
