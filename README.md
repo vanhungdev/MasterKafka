@@ -219,7 +219,7 @@ Concep:
     ```csharp
 	var config = new ProducerConfig
 	{
-		BootstrapServers = "34.171.40.194:9092"
+		BootstrapServers = "localhost:9092"
 	};
 
 	var topics = new List<string>() { "topic-events1", "topic-events2" };
