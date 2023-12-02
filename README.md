@@ -1,4 +1,4 @@
-# Master Parallel Consumer Kafka --- Đang viết chưa xong
+# Master Parallel Consumer Kafka
 MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi HungNV165.
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.
 
@@ -87,7 +87,7 @@ networks:
 2. Chú ý `container_name` đã có chưa: `zookeeper`, `kafka`, `kafdrop`.  
 3. Chú ý `networks` đã có chưa: `kafka-net`.  
 4. Chú ý cấu hình các `environment` (biến môi trường) phù hợp.  
-5. Chú ý nếu gặp lỗi `The requested image's platform` thì điều chỉnh `image` lại cho phù hợp với platform cảu bạn.
+5. Chú ý nếu gặp lỗi `The requested image's platform` thì điều chỉnh `image` lại cho phù hợp với platform của bạn.
  Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:  
  
  ```bash
@@ -287,33 +287,3 @@ Concep:
 	
 	Giải thích
 	
-	
-## Xử lý code Consumer:
-
- Mô tả ở đây: 
-
- Concep:
-
- 
-1. Curl push mesage:  
-    ```bash
-    curl --location 'http://localhost:5001/Home/Privacy' \
-     --header 'Content-Type: application/json' \
-     --data-raw '{
-       "id": 1,
-       "Name": "hung"
-     }'
-	```	
-	
-1. Hướng dẫn sử dụng : 
-
-    ```csharp	
-            var topic5 = "events5";
-            // More Topic
-
-            _consumerManager.AddConsumer(topic5, 
-                message => { _orderProcess.CreateOrderProcess(message, topic5); return Task.CompletedTask; }, 
-                KafkaConfiguration.ConsumerConfig); // Configuration can be changed
-	```	
-
-	Giải thích
