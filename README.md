@@ -214,8 +214,36 @@ Concep:
        "Name": "hung"
      }'
 	```	
-	
-1. Xử lý code : 
+1. Producer hàng loạt: 
+
+    ```csharp
+	var config1 = new ProducerConfig
+	{
+		BootstrapServers = "34.171.40.194:9092"
+	};
+
+	var topics = new List<string>() { "events1" };
+
+	Parallel.For(0, topics.Count, i =>
+	{
+		var topic = topics[i];
+		var numMessages = 2000;
+
+		for (int j = 1; j <= numMessages; j++)
+		{
+			var message = new Message<Null, string>
+			{
+				Value = $"message {j} for {topic}"
+			};
+
+			// Gọi hàm produce message theo từng topic
+			_messageBroker.ProducePushMessage(topic, config1, message, message.Value);
+		}
+	});
+
+	```	
+		
+2. Code xử lý code : 
 
     ```csharp
     public class KafkaProducer : IKafkaProducer
