@@ -132,11 +132,12 @@ networks:
 
 1. Kafka container:
     ```bash
-    docker run -d --name kafka --network kafka-net -p 9092:9092 -e
-	KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -e
-	KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT -e
-	KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e
-	KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 wurstmeister/kafka
+    docker run -d --name kafka --network kafka-net -p 9092:9092 -e \
+    KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -e \
+    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT -e \
+    KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e \
+    KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 wurstmeister/kafka
+    
     ```
 	
 1. Kafdrop container:
