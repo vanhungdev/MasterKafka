@@ -28,7 +28,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
     34.171.40.194:9092
 	```	
 	
-## Cài Đặt Kafka bằng docker compose:  
+## Cài đặt Kafka bằng docker compose:  
 
 **Để sử dụng được Kafka cần có 3 container cần thiết sau:**   
 
@@ -104,7 +104,7 @@ networks:
 **Lưu lý các biến môi trường sau:**   
 
 1. **Kafka container:**  
- `KAFKA_ADVERTISED_LISTENERS` Nếu dùng host VPS thì để IP như sau:
+ `KAFKA_ADVERTISED_LISTENERS` Nếu dùng host VPS thì để IP như sau:  
  `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`.   
  Với localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
  
