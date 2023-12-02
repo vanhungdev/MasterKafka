@@ -111,7 +111,7 @@ networks:
 2. **Kafdrop container:**  
  `KAFKA_BROKERCONNECT` Lưu ý nếu dùng VPS thì để IP như sau:  
  `KAFKA_BROKERCONNECT: 34.171.40.194:9092`. 
- Với localhost thì KAFKA_BROKERCONNECT: ocalhost:9092`.
+ Với localhost thì `KAFKA_BROKERCONNECT: localhost:9092`.
 
  
 ## Cài đặt kafka bằng docker run từng container (cách khác nếu không muốn chạy compose):
