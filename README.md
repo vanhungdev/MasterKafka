@@ -2,12 +2,12 @@
 MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi HungNV165.
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.
 
-### Detailed build status
+### Người thực hiện
 
 | Branch | AppVeyor                                                                                                                                                              |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `dev`  | HungNV165 |
-| `main` | PhongDh10 |
+| `Code chính `  | HungNV165 |
+| `Giám sát` | PhongDh10, KhiemBT |
 
 
 
