@@ -146,7 +146,7 @@ networks:
 	KAFKA_BROKERCONNECT=localhost:9092 -e \
      JVM_OPTS="-Xms32M -Xmx64M" obsidiandynamics/kafdrop
     ```
-	Kafdrop chưa có cho macbook m1 pro
+	Kafdrop chưa có cho macbook m1 (arm64v8)
 	
 ## Công cụ quản lý container (option):  
 
