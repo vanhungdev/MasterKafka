@@ -222,12 +222,12 @@ Concep:
 		BootstrapServers = "34.171.40.194:9092"
 	};
 
-	var topics = new List<string>() { "events1" };
+	var topics = new List<string>() { "topic-events1", "topic-events2" };
 
 	Parallel.For(0, topics.Count, i =>
 	{
 		var topic = topics[i];
-		var numMessages = 2000;
+		var numMessages = 20000;
 
 		for (int j = 1; j <= numMessages; j++)
 		{
