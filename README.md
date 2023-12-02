@@ -4,10 +4,10 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 
 ### Người thực hiện
 
-| Branch | AppVeyor                                                                                                                                                              |
+| Role | Description                                                                                                                                                              |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Dev `  | HungNV165 Nguyên cứu phát triển dự án. |
-| `Manager` | PhongDH10: Review code, KhiemBT quản lý |
+| `Dev `  | Hung--NV165 Nguyên cứu phát triển dự án. |
+| `Manager` | Quản lý đánh giá |
 
 
 
