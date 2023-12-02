@@ -2,7 +2,7 @@
 MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi HungNV165.
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.
 
-**Thông tin Brocker Kafka đã có sẵn trên VPS có thể sử dụng.**   
+**Thông tin Broker Kafka đã có sẵn trên VPS có thể sử dụng.**   
 **Lưu ý:** Mạng công ty cần maphost mới truy cập được Kafdrop và Portainer - Để dùng sever có sẵn thì dùng mạng thường hoặc VPN 
 
 1. MapHost by pass proxy (mạng công ty):  
@@ -105,12 +105,13 @@ networks:
 
 1. **Kafka container:**  
  `KAFKA_ADVERTISED_LISTENERS` Nếu dùng host VPS thì để IP như sau:
- `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`   
+ `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`.   
  Với localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
  
 2. **Kafdrop container:**  
- `KAFKA_BROKERCONNECT` lưu ý nếu dùng VPS:  
- `KAFKA_BROKERCONNECT: 34.171.40.194:9092` dùng ip của VPS
+ `KAFKA_BROKERCONNECT` Lưu ý nếu dùng VPS thì để IP như sau:  
+ `KAFKA_BROKERCONNECT: 34.171.40.194:9092`. 
+ Với localhost thì KAFKA_BROKERCONNECT: ocalhost:9092`.
 
  
 ## Cài đặt kafka bằng docker run từng container (cách khác nếu không muốn chạy compose):
