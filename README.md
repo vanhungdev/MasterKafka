@@ -217,7 +217,7 @@ Concep:
 	
 1. Xử lý code : 
 
-    ```bash
+    ```csharp
     public class KafkaProducer : IKafkaProducer
     {
         public async Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest)
@@ -270,7 +270,7 @@ Concep:
 	
 1. Hướng dẫn sử dụng : 
 
-    ```bash	
+    ```csharp	
             var topic5 = "events5";
             // More Topic
 
