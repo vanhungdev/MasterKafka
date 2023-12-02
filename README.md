@@ -6,8 +6,8 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
 
 | Branch | AppVeyor                                                                                                                                                              |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Code chính `  | HungNV165 |
-| `Giám sát` | PhongDh10, KhiemBT |
+| `Dev `  | HungNV165 Nguyên cứu phát triển dự án. |
+| `Manager` | PhongDH10: Review code, KhiemBT quản lý |
 
 
 
