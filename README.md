@@ -108,19 +108,31 @@ networks:
   http://localhost:9091
  ```
    
- Nếu chưa biết tạo file docker compose trên linux/centos thì làm như sau:
+ Nếu chưa biết tạo file docker compose trên linux/centos thì làm như sau, ở window chỉ cần cd đến thư mục chứa file và chạy:
 
 0. Kiểm tra danh sách thư mục:  
     ```bash
    ls
     ``` 
-
 1. Tạo thư mục lưu file docker conpose:  
     ```bash
    mkdir kafka-docker-compose-file
     ``` 
+3. Tạo thư mục lưu file docker conpose:  
+    ```bash
+   mkdir kafka-docker-compose-file
+    ``` 
+3. Đi đến thư mục cha:  
+    ```bash
+   cd kafka-docker-compose-file
+    ``` 
+4. tạo file docker compose:  
+    ```bash
+   vim docker-compose.yaml
+    ``` 
 
- 	
+Coppy file docker 
+
 **Lưu lý các biến môi trường sau:**   
 
 1. **Kafka container:**  
