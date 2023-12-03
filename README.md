@@ -131,7 +131,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
    cd kafka-docker-compose-file
    vim docker-compose.yaml
     ``` 
-
+**Cách xử lý file với Vim:**
 Sa khi cấu hình xong file docker compose xong thì nhấn: `esc + :wq` để lưu và thoát.  
 Phím `i` để chỉnh sửa.  
 Phím `gg` để đưa con trỏ chuột về đầu file.   
