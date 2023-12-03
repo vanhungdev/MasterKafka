@@ -117,16 +117,12 @@ networks:
 1. Tạo thư mục lưu file docker conpose:  
     ```bash
    mkdir kafka-docker-compose-file
-    ``` 
-3. Tạo thư mục lưu file docker conpose:  
-    ```bash
-   mkdir kafka-docker-compose-file
-    ``` 
+ ``` 
 3. Đi đến thư mục cha:  
     ```bash
    cd kafka-docker-compose-file
     ``` 
-4. tạo file docker compose:  
+4. Tao file docker compose:  
     ```bash
    vim docker-compose.yaml
     ``` 
