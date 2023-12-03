@@ -123,7 +123,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
     ```bash
    cd kafka-docker-compose-file
     ``` 
-3. ạo file docker compose:  
+3. Tạo file docker compose:  
     ```bash
    vim docker-compose.yaml
     ``` 
