@@ -37,7 +37,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
     34.171.40.194:9092
 	```	
 	
-## Cài đặt Kafka bằng docker compose:  
+## Cách 1: cài đặt Kafka bằng docker compose:  
 
 **Để sử dụng được Kafka cần có 3 container cần thiết sau:**   
 
@@ -123,7 +123,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
     ```bash
    cd kafka-docker-compose-file
     ``` 
-3. Tạo file docker compose:  
+3. ạo file docker compose:  
     ```bash
    vim docker-compose.yaml
     ``` 
@@ -145,7 +145,7 @@ Phím `i` để chỉnh sửa, `gg` để đưa con trỏ chuột về đầu fi
  Với localhost thì `KAFKA_BROKERCONNECT: localhost:9092`.
 
  
-## Cài đặt Kafka bằng docker run từng container (cách khác nếu không muốn chạy compose):
+## Cách 2: cài đặt Kafka bằng docker run từng container (không muốn chạy compose):
 
 0. Tạo networks:  
     ```bash
