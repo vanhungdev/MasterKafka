@@ -221,6 +221,7 @@ cho phép người quản trị và người phát triển tương tác với Do
     kafka-console-consumer.sh  --bootstrap-server localhost:9092 --topic topic-events2 --group group-topic-events2-001
 
     ``` 
+    Việc muốn đọc toàn bộ message chỉ cần thêm `--from-beginning`
 
 ## Xử lý code Producer:
 
