@@ -118,7 +118,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
      sudo chmod +x /usr/local/bin/docker-compose
     ``` 
 
-2. cài vim nếu chưa  (chạy từng ):  
+2. cài vim nếu chưa  (chạy từng dòng):  
     ```bash
     sudo yum install vim
     vim --version
