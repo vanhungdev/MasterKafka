@@ -124,7 +124,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
     vim --version
     ``` 
 
-3. Tạo thư mục lưu file dockerconpose (chạy từng ):  
+3. Tạo thư mục lưu file dockerconpose (chạy từng dòng):  
     ```bash
    ls
    mkdir kafka-docker-compose-file
