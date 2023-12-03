@@ -223,6 +223,12 @@ cho phép người quản trị và người phát triển tương tác với Do
     ``` 
     Việc muốn đọc toàn bộ message chỉ cần thêm `--from-beginning`
 
+9. Xem thông tin chi tiết consumer group:  
+    ```bash
+    kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group group-topic-events2-001
+
+    ``` 
+
 ## Xử lý code Producer:
 
  Mô tả ở đây: 
