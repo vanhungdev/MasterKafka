@@ -218,7 +218,8 @@ cho phép người quản trị và người phát triển tương tác với Do
 	
 8. Consumer với group:  
     ```bash
-    kafka-console-consumer.sh --topic topic-events2 --from-beginning --bootstrap-server localhost:9092
+    $ kafka-console-consumer.sh  --bootstrap-server localhost:9092 --topic topic-events2 --group group-topic-events2-001
+
     ``` 
 
 ## Xử lý code Producer:
