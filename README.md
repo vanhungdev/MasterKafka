@@ -111,20 +111,17 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
    
  Nếu chưa biết tạo file docker compose trên linux/centos thì làm như sau, ở window chỉ cần cd đến thư mục chứa file và chạy:
 
-0. Kiểm tra danh sách thư mục:  
+0. Cài docker-compose nếu chưa có (chạy từng dòng):  
     ```bash
-   ls
+     docker-compose --version
+     sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+     sudo chmod +x /usr/local/bin/docker-compose
     ``` 
-1. Tạo thư mục lưu file docker conpose:  
+1. Tạo thư mục lưu file dockerconpose (chạy từng dòng):  
     ```bash
+   ls \
    mkdir kafka-docker-compose-file
-    ``` 
-2. Đi đến thư mục cha:  
-    ```bash
    cd kafka-docker-compose-file
-    ``` 
-3. ạo file docker compose:  
-    ```bash
    vim docker-compose.yaml
     ``` 
 
