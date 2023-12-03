@@ -98,7 +98,6 @@ networks:
 4. Chú ý cấu hình các `environment` (biến môi trường) phù hợp.  
 5. Chú ý nếu gặp lỗi `The requested image's platform` thì điều chỉnh `image` lại cho phù hợp với platform của bạn.  
  Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:  
- 
  ```bash
   docker-compose up -d
  ```
@@ -108,7 +107,19 @@ networks:
  ```bash
   http://localhost:9091
  ```
- 
+   
+ Nếu chưa biết tạo file docker compose trên linux/centos thì làm như sau:
+
+0. Kiểm tra danh sách thư mục:  
+    ```bash
+   ls
+    ``` 
+
+1. Tạo thư mục lưu file docker conpose:  
+    ```bash
+   mkdir kafka-docker-compose-file
+    ``` 
+
  	
 **Lưu lý các biến môi trường sau:**   
 
