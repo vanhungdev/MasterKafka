@@ -127,6 +127,10 @@ networks:
    vim docker-compose.yaml
     ``` 
 
+Sa khi cấu hình xong file docker compose xong thì nhấn: esc + : + wq để lưu và thoát. 
+Phím i để chỉnh sửa
+
+
 Coppy file docker 
 
 **Lưu lý các biến môi trường sau:**   
