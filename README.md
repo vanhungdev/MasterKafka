@@ -117,7 +117,14 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
      sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
      sudo chmod +x /usr/local/bin/docker-compose
     ``` 
-2. Tạo thư mục lưu file dockerconpose (chạy từng ):  
+
+2. cài vim nếu chưa  (chạy từng ):  
+    ```bash
+    sudo yum install vim
+    vim --version
+    ``` 
+
+3. Tạo thư mục lưu file dockerconpose (chạy từng ):  
     ```bash
    ls
    mkdir kafka-docker-compose-file
