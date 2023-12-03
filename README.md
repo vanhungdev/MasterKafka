@@ -97,7 +97,7 @@ networks:
 3. Chú ý `networks` đã có chưa: `kafka-net`.  
 4. Chú ý cấu hình các `environment` (biến môi trường) phù hợp.  
 5. Chú ý nếu gặp lỗi `The requested image's platform` thì điều chỉnh `image` lại cho phù hợp với platform của bạn.  
- Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:  
+Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml, sau đó chạy lệnh:  
  ```bash
   docker-compose up -d
  ```
@@ -122,7 +122,7 @@ networks:
     ```bash
    cd kafka-docker-compose-file
     ``` 
-3. Tạo file docker compose:  
+3. ạo file docker compose:  
     ```bash
    vim docker-compose.yaml
     ``` 
