@@ -1,13 +1,13 @@
 # Master Parallel Consumer Kafka
-MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi HungNV165.
+MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi H.
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.
 
 ### Người thực hiện
 
 | Role | Description                                                                                                                                                              |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Dev `  | Hung--NV165 Nguyên cứu phát triển dự án. |
-| `Manager` | Quản lý đánh giá |
+| `Dev `  | H Nguyên cứu phát triển dự án. |
+| `Manager` | - |
 
 
 
