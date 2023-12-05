@@ -260,9 +260,9 @@ cho phép người quản trị và người phát triển tương tác với Do
 
 ## Xử lý code Producer:
 
- Mô tả ở đây: 
-
-Concep:
+ Yêu cầu bài toán:  
+ - Có thể push message nhanh nhất khi có topic mới hoặc bootstrap server mới.  
+ - Có ghi log đầy đủ push tới topic nào, PartitionOffset nào.  
 
  
 1. Curl push mesage: 
@@ -276,7 +276,7 @@ Concep:
 
     ```
     
-1. Producer hàng loạt: 
+2. Test Producer hàng loạt: 
 
     ```csharp
 	var config = new ProducerConfig
@@ -305,7 +305,7 @@ Concep:
 
 	```	
 		
-2. Code xử lý code : 
+3. Code xử lý code Producer : 
 
     ```csharp
     public class KafkaProducer : IKafkaProducer
