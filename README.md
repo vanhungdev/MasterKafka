@@ -276,34 +276,26 @@ cho phép người quản trị và người phát triển tương tác với Do
 
     ```
     
-2. Test Producer hàng loạt: 
+2. Push message: 
 
     ```csharp
-            var config = new ProducerConfig
-            {
-                BootstrapServers = "34.171.40.194:9092"
-            };
+    
+         private readonly IKafkaProducer _messageBroker;
+	 public KafkaProducerController(IKafkaProducer messageBroker)
+	 {
+	     _messageBroker = messageBroker;
 
-            Parallel.For(0, input.Topics.Count, i =>
-            {
-                var topic = input.Topics[i];
-                var numMessages = input.TotalMessage;
 
-                for (int j = 1; j <= numMessages; j++)
-                {
-                    var message = new Message<Null, string>
-                    {
-                        Value = $"message {j} for {topic}"
-                    };
+	  var config = new ProducerConfig
+	  {
+	      BootstrapServers = "34.171.40.194:9092"
+	  };
+ 	  _messageBroker.ProducePushMessage(topic, config, message, message.Value);
 
-                    // Gọi hàm produce message theo từng topic
-                    _messageBroker.ProducePushMessage(topic, config, message, message.Value);
-                }
-            });
 
 	```	
 		
-3. Code xử lý code Producer : 
+2. Code xử lý code Producer : 
 
     ```csharp
 	    public class KafkaProducer : IKafkaProducer
