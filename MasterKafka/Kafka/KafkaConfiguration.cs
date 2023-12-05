@@ -5,7 +5,6 @@ namespace MasterKafka.Kafka
     public class KafkaConfiguration
     {
         public static ConsumerConfig ConsumerConfig { get; }
-        public static readonly string Topic = "events6";
 
         static KafkaConfiguration()
         {

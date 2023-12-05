@@ -15,7 +15,7 @@ namespace MasterKafka.Kafka.Producer
         /// <param name="config"></param>
         /// <param name="objRequest"></param>
         /// <param name="topic"></param>
-        /// <returns></returns>
-        Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest);
+        /// <returns></returns>essage
+        Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest, string message);
     }
 }

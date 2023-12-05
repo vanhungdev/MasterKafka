@@ -10,11 +10,13 @@ namespace MasterKafka.Kafka.Consumer
 {
     public interface IKafkaConsumer
     {
+
         /// <summary>
-        /// Start a consumer
+        /// 
         /// </summary>
         /// <param name="topic"></param>
         /// <param name="stoppingToken"></param>
+        /// <param name="consumerInstance"></param>
         /// <returns></returns>
         Task StartConsuming(string topic, CancellationToken stoppingToken);
 

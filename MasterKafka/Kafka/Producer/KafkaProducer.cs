@@ -8,7 +8,7 @@ namespace MasterKafka.Kafka.Producer
 {
     public class KafkaProducer : IKafkaProducer
     {
-        public async Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest)
+        public async Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest, string messageValue)
         {
             var log = new StringBuilder();
             using var producer = new ProducerBuilder<Null, string>(config).Build();
@@ -18,8 +18,8 @@ namespace MasterKafka.Kafka.Producer
                 var message = new Message<Null, string> { Value = jsonObj };
                 var result = await producer.ProduceAsync(topic, message);
 
-                log.AppendLine($"Input: {jsonObj}");
-                log.AppendLine($"Delivered: {JsonConvert.SerializeObject(result.Value)} to: {result.TopicPartitionOffset}");
+                //log.AppendLine($"Input: {jsonObj}");
+                log.AppendLine($"m: {val} to offset: {result.TopicPartitionOffset.Offset.Value}");
                 return true;
             }
             catch (ProduceException<Null, string> e)
@@ -29,7 +29,7 @@ namespace MasterKafka.Kafka.Producer
             }
             finally
             {
-                Console.WriteLine(log);
+                Console.WriteLine(log.ToString());
                 //LoggingHelper.SetLogStep(log.ToString());
             }
         }

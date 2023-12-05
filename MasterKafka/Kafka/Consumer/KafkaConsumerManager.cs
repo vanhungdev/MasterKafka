@@ -21,11 +21,11 @@ namespace MasterKafka.Kafka.Consumer
         /// <param name="topic"></param>
         /// <param name="messageHandler"></param>
         /// <param name="config"></param>
-        public void AddConsumer(string topic, Func<string, Task> messageHandler, ConsumerConfig config)
+        public void AddConsumer(string topic, Func<string, Task> messageHandler, ConsumerConfig config, int instance)
         {
             if (!_consumers.ContainsKey(topic))
             {
-                var consumer = new KafkaConsumer(messageHandler, config);
+                var consumer = new KafkaConsumer(messageHandler, config, instance);
                 _consumers.Add(topic, consumer);
             }
         }
