@@ -260,81 +260,143 @@ cho phép người quản trị và người phát triển tương tác với Do
 
 ## Xử lý code Producer:
 
- Mô tả ở đây: 
-
-Concep:
+ Yêu cầu bài toán:  
+ - Có thể push message nhanh nhất khi có topic mới hoặc bootstrap server mới.  
+ - Có ghi log đầy đủ push tới topic nào, PartitionOffset nào.  
 
  
-1. Curl push mesage:  
+1. Curl push mesage: 
     ```bash
-    curl --location 'http://localhost:5001/Home/Privacy' \
-     --header 'Content-Type: application/json' \
-     --data-raw '{
-       "id": 1,
-       "Name": "hung"
-     }'
-	```	
-1. Producer hàng loạt: 
+    curl --location 'http://localhost:5003/KafkaProducer/api/push-message-test' \
+	--header 'Content-Type: application/json' \
+	--data '{
+    	"Topics": ["events5", "events6"],
+    	"TotalMessage": 20000
+	}'
+
+    ```
+    
+2. Push message: 
 
     ```csharp
-	var config = new ProducerConfig
+	private readonly IKafkaProducer _messageBroker;
+	
+	public KafkaProducerController(IKafkaProducer messageBroker)
 	{
-		BootstrapServers = "localhost:9092"
-	};
-
-	var topics = new List<string>() { "topic-events1", "topic-events2" };
-
-	Parallel.For(0, topics.Count, i =>
-	{
-		var topic = topics[i];
-		var numMessages = 20000;
-
-		for (int j = 1; j <= numMessages; j++)
-		{
-			var message = new Message<Null, string>
-			{
-				Value = $"message {j} for {topic}"
-			};
-
-			// Gọi hàm produce message theo từng topic
-			_messageBroker.ProducePushMessage(topic, config, message, message.Value);
-		}
-	});
+	    _messageBroker = messageBroker;
+	    
+	    var config = new ProducerConfig
+	    {
+	        BootstrapServers = "34.171.40.194:9092"
+	    };
+	
+	    _messageBroker.ProducePushMessage(
+	        topic, 
+	        config, 
+	        message, 
+	        message.Value
+	    );
+	}
 
 	```	
 		
-2. Code xử lý code : 
+2. Code xử lý code Producer : 
 
     ```csharp
-    public class KafkaProducer : IKafkaProducer
-    {
-        public async Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest)
-        {
-            var log = new StringBuilder();
-            using var producer = new ProducerBuilder<Null, string>(config).Build();
-            try
-            {
-                var jsonObj = JsonConvert.SerializeObject(objRequest);
-                var message = new Message<Null, string> { Value = jsonObj };
-                var result = await producer.ProduceAsync(topic, message);
-
-                log.AppendLine($"Input: {jsonObj}");
-                log.AppendLine($"Delivered: {JsonConvert.SerializeObject(result.Value)} to: {result.TopicPartitionOffset}");
-                return true;
-            }
-            catch (ProduceException<Null, string> e)
-            {
-                log.AppendLine($"Delivery failed: {e.Error.Reason}");
-                return false;
-            }
-            finally
-            {
-                Console.WriteLine(log);
-                LoggingHelper.SetLogStep(log.ToString());
-            }
-        }
-    }
+	    public class KafkaProducer : IKafkaProducer
+	    {
+	        public async Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest, string messageValue)
+	        {
+	            var log = new StringBuilder();
+	            using var producer = new ProducerBuilder<Null, string>(config).Build();
+	            try
+	            {
+	                var jsonObj = JsonConvert.SerializeObject(objRequest);
+	                var message = new Message<Null, string> { Value = jsonObj };
+	                var result = await producer.ProduceAsync(topic, message);
+	
+	                //log.AppendLine($"Input: {jsonObj}");
+	                log.AppendLine($"m: {messageValue} to offset: {result.TopicPartitionOffset.Offset.Value}");
+	                return true;
+	            }
+	            catch (ProduceException<Null, string> e)
+	            {
+	                log.AppendLine($"Delivery failed: {e.Error.Reason}");
+	                return false;
+	            }
+	            finally
+	            {
+	                Console.WriteLine(log.ToString());
+	                //LoggingHelper.SetLogStep(log.ToString());
+	            }
+	        }
+	    }
 	```	
 	
-	Giải thích
+
+Đoạn code trên thực hiện việc gửi (produce) message lên Kafka sử dụng Kafka:
+
+ 1. Định nghĩa interface IKafkaProducer có phương thức ProducePushMessage để produce message.  
+
+ 2. KafkaProducerController sử dụng dependency injection để nhận vào một implementation của IKafkaProducer (ở đây là KafkaProducer).  
+
+ 3. Trong KafkaProducerController, khởi tạo ProducerConfig chứa thông tin cấu hình bootstrap server.  
+
+ 4. Gọi phương thức ProducePushMessage của IKafkaProducer, truyền vào các tham số cần thiết:  
+
+	- Topic: tên topic Kafka cần ghi  
+	- Config: cấu hình producer  
+	- Message: object chứa nội dung message (được serialize sang JSON)  
+	- Message.Value: giá trị key của message dùng để ghi log  
+
+ 5. Trong KafkaProducer:
+	- Khởi tạo Kafka Producer để giao tiếp với Kafka
+	- Serialize object request sang JSON
+	- Đóng gói message value vào trong Kafka Message
+	- Gọi ProduceAsync để ghi message lên Kafka, trả về kết quả là offset message đã được ghi.
+	- Xử lý exception nếu có lỗi xảy ra.
+	- Như vậy là đã gửi thành công 1 message lên Kafka.
+
+
+## Xử lý code Consumer:
+
+ Yêu cầu bài toán:  
+ - Có thể push message nhanh nhất khi có topic mới hoặc bootstrap server mới.  
+ - Có ghi log đầy đủ push tới topic nào, PartitionOffset nào.  
+
+**Concept:**  
+ 
+1. Curl push mesage: 
+    ```bash
+    curl --location 'http://localhost:5003/KafkaProducer/api/push-message-test' \
+	--header 'Content-Type: application/json' \
+	--data '{
+    	"Topics": ["events5", "events6"],
+    	"TotalMessage": 20000
+	}'
+
+    ```
+    
+2. Push message: 
+
+    ```csharp
+	private readonly IKafkaProducer _messageBroker;
 	
+	public KafkaProducerController(IKafkaProducer messageBroker)
+	{
+	    _messageBroker = messageBroker;
+	    
+	    var config = new ProducerConfig
+	    {
+	        BootstrapServers = "34.171.40.194:9092"
+	    };
+	
+	    _messageBroker.ProducePushMessage(
+	        topic, 
+	        config, 
+	        message, 
+	        message.Value
+	    );
+	}
+
+	```	
