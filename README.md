@@ -266,13 +266,8 @@ Concep:
 
  
 1. Curl push mesage:  
-    ```bash
-curl --location 'http://localhost:5003/KafkaProducer/api/push-message-test' \
---header 'Content-Type: application/json' \
---data '{
-    "Topics": ["events5", "events6"],
-    "TotalMessage": 20000
-}'
+    ```bash  
+ádadas
 	```	
 1. Producer hàng loạt: 
 
