@@ -265,8 +265,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 Concep:
 
  
-1. Curl push mesage:
-2. 
+1. Curl push mesage: 
     ```bash
     kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group group-topic-events2-001
 
