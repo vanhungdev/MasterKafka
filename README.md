@@ -347,7 +347,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 	- Topic: tên topic Kafka cần ghi  
 	- Config: cấu hình producer  
 	- Message: object chứa nội dung message (được serialize sang JSON)  
-	- Message.Value: giá trị của message  
+	- Message.Value: giá trị key của message dùng để ghi log  
 
  5. Trong KafkaProducer:
 	- Khởi tạo Kafka Producer để giao tiếp với Kafka
