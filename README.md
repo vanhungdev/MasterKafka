@@ -333,7 +333,6 @@ cho phép người quản trị và người phát triển tương tác với Do
 	    }
 	```	
 	
-	Giải thích:
 
 Đoạn code trên thực hiện việc gửi (produce) message lên Kafka sử dụng Kafka:
 
