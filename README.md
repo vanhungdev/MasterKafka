@@ -267,7 +267,12 @@ Concep:
  
 1. Curl push mesage: 
     ```bash
-    kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group group-topic-events2-001
+    curl --location 'http://localhost:5003/KafkaProducer/api/push-message-test' \
+	--header 'Content-Type: application/json' \
+	--data '{
+    	"Topics": ["events5", "events6"],
+    	"TotalMessage": 20000
+	}'
 
     ```
     
