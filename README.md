@@ -356,4 +356,47 @@ cho phép người quản trị và người phát triển tương tác với Do
 	- Gọi ProduceAsync để ghi message lên Kafka, trả về kết quả là offset message đã được ghi.
 	- Xử lý exception nếu có lỗi xảy ra.
 	- Như vậy là đã gửi thành công 1 message lên Kafka.
+
+
+## Xử lý code Consumer:
+
+ Yêu cầu bài toán:  
+ - Có thể push message nhanh nhất khi có topic mới hoặc bootstrap server mới.  
+ - Có ghi log đầy đủ push tới topic nào, PartitionOffset nào.  
+
+** Concept: **  
+ 
+1. Curl push mesage: 
+    ```bash
+    curl --location 'http://localhost:5003/KafkaProducer/api/push-message-test' \
+	--header 'Content-Type: application/json' \
+	--data '{
+    	"Topics": ["events5", "events6"],
+    	"TotalMessage": 20000
+	}'
+
+    ```
+    
+2. Push message: 
+
+    ```csharp
+	private readonly IKafkaProducer _messageBroker;
 	
+	public KafkaProducerController(IKafkaProducer messageBroker)
+	{
+	    _messageBroker = messageBroker;
+	    
+	    var config = new ProducerConfig
+	    {
+	        BootstrapServers = "34.171.40.194:9092"
+	    };
+	
+	    _messageBroker.ProducePushMessage(
+	        topic, 
+	        config, 
+	        message, 
+	        message.Value
+	    );
+	}
+
+	```	
