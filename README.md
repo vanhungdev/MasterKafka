@@ -364,7 +364,7 @@ cho phép người quản trị và người phát triển tương tác với Do
  - Có thể push message nhanh nhất khi có topic mới hoặc bootstrap server mới.  
  - Có ghi log đầy đủ push tới topic nào, PartitionOffset nào.  
 
-** Concept: **  
+**Concept:**  
  
 1. Curl push mesage: 
     ```bash
