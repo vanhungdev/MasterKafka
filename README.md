@@ -344,10 +344,10 @@ cho phép người quản trị và người phát triển tương tác với Do
 
  4. Gọi phương thức ProducePushMessage của IKafkaProducer, truyền vào các tham số cần thiết:  
 
-	- topic: tên topic Kafka cần ghi  
-	- config: cấu hình producer  
-	- message: object chứa nội dung message (được serialize sang JSON)  
-	- message.Value: giá trị của message  
+	- Topic: tên topic Kafka cần ghi  
+	- Config: cấu hình producer  
+	- Message: object chứa nội dung message (được serialize sang JSON)  
+	- Message.Value: giá trị của message  
 
  5. Trong KafkaProducer:
 	- Khởi tạo Kafka Producer để giao tiếp với Kafka
