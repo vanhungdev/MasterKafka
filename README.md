@@ -279,8 +279,6 @@ cho phép người quản trị và người phát triển tương tác với Do
 2. Push message: 
 
     ```csharp
-    
-        // Push message
 	private readonly IKafkaProducer _messageBroker;
 	
 	public KafkaProducerController(IKafkaProducer messageBroker)
