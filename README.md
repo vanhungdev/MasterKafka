@@ -280,18 +280,25 @@ cho phép người quản trị và người phát triển tương tác với Do
 
     ```csharp
     
-         private readonly IKafkaProducer _messageBroker;
-	 public KafkaProducerController(IKafkaProducer messageBroker)
-	 {
-	     _messageBroker = messageBroker;
-
-
-	  var config = new ProducerConfig
-	  {
-	      BootstrapServers = "34.171.40.194:9092"
-	  };
- 	  _messageBroker.ProducePushMessage(topic, config, message, message.Value);
-
+        // Push message
+	private readonly IKafkaProducer _messageBroker;
+	
+	public KafkaProducerController(IKafkaProducer messageBroker)
+	{
+	    _messageBroker = messageBroker;
+	    
+	    var config = new ProducerConfig
+	    {
+	        BootstrapServers = "34.171.40.194:9092"
+	    };
+	
+	    _messageBroker.ProducePushMessage(
+	        topic, 
+	        config, 
+	        message, 
+	        message.Value
+	    );
+	}
 
 	```	
 		
