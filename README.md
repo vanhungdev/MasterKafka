@@ -304,7 +304,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 
     ```csharp
 	public class KafkaProducer : IKafkaProducer
-	    {
+	{
 	        public async Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest, string messageValue)
 	        {
 	            var log = new StringBuilder();
