@@ -373,7 +373,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 	  	- Handle được việc có nhiều partition của topic
 	  	- Handle, tính toán số lượn intanse consumer từ partition được có nhiều pods trên k8s khi `scaling in`, `scaling out`
     - Về vấn đề Quản lý topic Consumer:
-    	- Quản lý topic, partition  
+    	- Quản lý topic, partition:  
     			- Có thể xem được các topic nào đang chạy.  
 	    		- Topic có bao nhiêu partition.  
 	    		- Partition chạy đến offset nào.  
