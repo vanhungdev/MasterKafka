@@ -176,7 +176,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
 	
 1. Kafdrop container:
     ```bash
-docker run -d --name kafdrop --network kafka-net -p 9091:9000 -e KAFKA_BROKERCONNECT=kafka:9093 -e JVM_OPTS="-Xms32M -Xmx64M" obsidiandynamics/kafdrop
+	docker run -d --name kafdrop --network kafka-net -p 9091:9000 -e KAFKA_BROKERCONNECT=kafka:9093 -e JVM_OPTS="-Xms32M -Xmx64M" obsidiandynamics/kafdrop
     ```
 	Kafdrop chưa có cho macbook m1 (arm64v8)
 	
