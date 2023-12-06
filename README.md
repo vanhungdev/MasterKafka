@@ -375,12 +375,12 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
 	  	- Handle, tính toán số lượn intanse consumer từ partition được có nhiều pods trên k8s khi `scaling in`, `scaling out`
     - Về vấn đề Quản lý topic Consumer:
     	- Quản lý topic, partition:  
-    			- Có thể xem được các topic nào đang chạy.  
-	    		- Topic có bao nhiêu partition.  
-	    		- Partition chạy đến offset nào.  
-	    		- Có bao nhiêu offset.  
-	    		- Có bao nhiêu instanse consumer của topic.  
-	    		- Có bao nhiêu pods đang chạy (nếu system cung cấp được Kafdrop thì quá ngon không cần nguyên cứu phần này).  
+    			+ Có thể xem được các topic nào đang chạy.  
+	    		+ Topic có bao nhiêu partition.  
+	    		+ Partition chạy đến offset nào.  
+	    		+ Có bao nhiêu offset.  
+	    		+ Có bao nhiêu instanse consumer của topic.  
+	    		+ Có bao nhiêu pods đang chạy (nếu system cung cấp được Kafdrop thì quá ngon không cần nguyên cứu phần này).  
     	- Có thể xem được message nào xử lý faild, có thể push lại.
 
 **Concept:**  
