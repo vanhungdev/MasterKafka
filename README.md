@@ -384,6 +384,11 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
     	- Có thể xem được message nào xử lý faild, có thể push lại.
 
 **Concept:**  
+1. Về trường hợp nếu có 1 topic, 1 partition:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1 hệ thống 
+
+
  
 1. Curl push mesage: 
     ```bash
