@@ -2,7 +2,7 @@
 MasterKafka là một dự án xử lý Apache Kafka được phát triển một cách chuyên nghiệp bởi H.
 Dự án này là kết quả của sự nghiên cứu sâu và triển khai một cách khoa học, được tính toán thiết kế để đáp ứng các yêu cầu cao cấp về xử lý dữ liệu lớn trên nền tảng Kafka.  
 
-## Người thực hiện
+## Phần 1: Gới thiệu tác giả
 
 | Role | Description                                                                                                                                                              |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -37,7 +37,7 @@ Dự án này là kết quả của sự nghiên cứu sâu và triển khai m�
     34.171.40.194:9092
 	```	
 	
-## Cách 1: cài đặt Kafka bằng docker compose:  
+## Phần 2: Cài đặt Kafka bằng docker compose:  
 
 **Để sử dụng được Kafka cần có 3 container cần thiết sau:**   
 
@@ -156,7 +156,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
  Với localhost thì `KAFKA_BROKERCONNECT: localhost:9092`.
 
  
-## Cách 2: cài đặt Kafka bằng docker run từng container (không muốn chạy compose):
+## Phần 3: Cài đặt Kafka bằng docker run từng container (không muốn chạy compose):
 
 0. Tạo networks:  
     ```bash
@@ -184,7 +184,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
     ```
 	Kafdrop chưa có cho macbook m1 (arm64v8)
 	
-## Công cụ quản lý container (option):  
+## Phần 4: Công cụ quản lý container (option):  
 
 Portainer là một công cụ quản lý Docker dựa trên giao diện web, giúp bạn dễ dàng quản lý và giám sát các container Docker trên một hoặc nhiều máy chủ. 
 Portainer cung cấp một giao diện người dùng đồ họa thân thiện, 
@@ -203,7 +203,7 @@ cho phép người quản trị và người phát triển tương tác với Do
     http://localhost:9000
     ```
 	
-## Truy cập và quản lý topic Kafka:  
+## Phần 5: Truy cập và quản lý topic Kafka:  
  
  Để sử dụng được kafka cũng ta cần kiểm tra xem container đã run chưa và cấu hình thêm topic cho nó. Cấu hình các partitions để xử linh hoạt hơn.
  Nếu không rành gõ lệnh các bạn có thể cấu hình trực tiếp bằng `Kafdrop` 
@@ -256,7 +256,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 
     ``` 
 
-## Xử lý code Producer:
+## Phần 6: Xử lý code Producer:
 
  Yêu cầu bài toán:  
  - Có thể push message nhanh nhất khi có topic mới hoặc bootstrap server mới.  
@@ -356,7 +356,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 
 Như vậy là đã gửi thành công 1 message lên Kafka.
 
-## Xử lý code Consumer:
+## Phần 7: Xử lý code Consumer:
 
 1. Yêu cầu bài toán:
 	- Về vấn đề refactor code:  
