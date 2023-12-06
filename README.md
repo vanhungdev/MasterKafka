@@ -350,9 +350,9 @@ cho phép người quản trị và người phát triển tương tác với Do
 	- Message.Value: giá trị key của message dùng để ghi log  
 
  5. Trong KafkaProducer:
-	- Khởi tạo Kafka Producer để giao tiếp với Kafka
-	- Serialize object request sang JSON
-	- Đóng gói message value vào trong Kafka Message
+	- Khởi tạo Kafka Producer để giao tiếp với Kafka.
+	- Serialize object request sang JSON.
+	- Đóng gói message value vào trong Kafka Message.
 	- Gọi ProduceAsync để ghi message lên Kafka, trả về kết quả là offset message đã được ghi.
 	- Xử lý exception nếu có lỗi xảy ra.
 	- Như vậy là đã gửi thành công 1 message lên Kafka.
@@ -366,11 +366,11 @@ cho phép người quản trị và người phát triển tương tác với Do
   		- khi config 1 topic mới hoặc một bootstrap server mới thì sẽ implement 3 method `Xử lý message`, `Xử lý message thành công`, `Xử lý message thất bại`.
 
     - Về vấn đề performance:  
-	  	- Xử lý được song song các message - 1 message bị exception không được dừng luồng consumer đang chạy.  
-	  	- Xử lý song song các topic 1 topic bị dừng không ảnh hưởng đến các topic khác.  
-	  	- Chạy ổn định không mất message
-	  	- Xử lý được lượng message lớn trong thời gian ngắn
-	  	- Không tốn quá nhiều tài nguyên RAM, CPU
+	  	- Handle được song song các message (1 topic N message không chờ đợi) - 1 message bị exception không được dừng luồng consumer đang chạy.  
+	  	- Handle song song các topic 1 topic bị dừng không ảnh hưởng đến các topic khác.  
+	  	- Chạy ổn định không mất message.
+	  	- Handle được lượng message lớn trong thời gian ngắn khi sever gặp vấn đề...
+	  	- Không tốn quá nhiều tài nguyên RAM, CPU.
 
 
 
