@@ -360,7 +360,17 @@ cho phép người quản trị và người phát triển tương tác với Do
 
 ## Xử lý code Consumer:
 
- Yêu cầu bài toán:  
+ Yêu cầu bài toán:
+  
+  Về vấn đề refactor code:  
+  	- Khi có một topic mới chúng ta chỉ cần config thông tin kafka và viết method xử lý cho nó là có thể thực hiện việc consumer.  
+  	- khi config 1 topic mới hoặc một bootstrap server mới thì sẽ implement 3 method `Xử lý message`, `Xử lý message thành công`, `Xử lý message thất bại`.  
+
+  Về vấn đề performance:  
+  	- Xử lý được song song các message - 1 message bị exception không được dừng luồng consumer đang chạy.  
+  	- Xử lý song song các topic 1 topic bị dừng không ảnh hưởng đến các topic khác.  
+  	- 
+
  - Có thể push message nhanh nhất khi có topic mới hoặc bootstrap server mới.  
  - Có ghi log đầy đủ push tới topic nào, PartitionOffset nào.  
 
