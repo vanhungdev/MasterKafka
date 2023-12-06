@@ -388,16 +388,50 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
 	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
 	     - Bước 1: hệ thống
 	     - Bước 2: hệ thống
-	     - Bước 3: hệ thống
-	     - Bước 4: hệ thống
-	     - Bước 5: hệ thống
-	     - Bước 6: hệ thống
-	     - Bước 7: hệ thống
-	     - Bước 8: hệ thống
-	     - Bước 9: hệ thống
 
 
+2. Về trường hợp nếu có 1 topic, 5 partition:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống
+
+
+3. Về trường hợp nếu có 5 topic, 1 partition:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống
  
+
+4. Về trường hợp nếu có 5 topic, mỗi topic có nhiều partition:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống
+
+5. Về trường hợp muốn all consumer:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống
+
+5. Về trường hợp muốn stop 1 topic:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống
+
+6. Về trường hợp muốn start 1 topic:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống
+
+7. Về trường hợp muốn all topic:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống	
+
+8. Về trường hợp muốn xem topic và các pods đang chạy:
+	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống		   	        
+
 1. Curl push mesage: 
     ```bash
     curl --location 'http://localhost:5003/KafkaProducer/api/push-message-test' \
