@@ -368,10 +368,12 @@ cho phép người quản trị và người phát triển tương tác với Do
 2. Về vấn đề performance:  
   	- Xử lý được song song các message - 1 message bị exception không được dừng luồng consumer đang chạy.  
   	- Xử lý song song các topic 1 topic bị dừng không ảnh hưởng đến các topic khác.  
-  	- 
+  	- Chạy ổn định không mất message
+  	- Xử lý được lượng message lớn trong thời gian ngắn
+  	- Không tốn quá nhiều tài nguyên RAM, CPU
 
 
-  	
+
 
 **Concept:**  
  
