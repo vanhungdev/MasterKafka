@@ -145,6 +145,7 @@ Mở terminal và di chuyển đến thư mục chứa tệp docker-compose.yml,
 **Lưu lý các biến môi trường sau:**   
 
 1. **Kafka container:**  
+ `INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092` Chú ý INSIDE OUTSITE khi chạy ở local để kết nối được với Kafdrop
  `KAFKA_ADVERTISED_LISTENERS` Nếu dùng host VPS thì để IP như sau:      
  `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://34.171.40.194:9092`.   
  Với localhost: `KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092`
