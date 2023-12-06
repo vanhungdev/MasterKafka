@@ -57,6 +57,7 @@ networks:
 
 services:
   zookeeper:
+    container_name: zookeeper
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
@@ -64,6 +65,7 @@ services:
       - kafka-net
 
   kafka:
+    container_name: kafka
     image: wurstmeister/kafka
     ports:
       - "9092:9092"
@@ -78,6 +80,7 @@ services:
       - kafka-net
 
   kafdrop:
+    container_name: kafdrop
     image: obsidiandynamics/kafdrop
     ports:
       - "9091:9000"
