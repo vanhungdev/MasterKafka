@@ -422,4 +422,4 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
 
 Logo trong git readme.md
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/OpenID_logo_2.svg/1200px-OpenID_logo_2.svg.png" alt="OpenID Logo"  />
+<img width="50%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/OpenID_logo_2.svg/1200px-OpenID_logo_2.svg.png" alt="OpenID Logo"  />
