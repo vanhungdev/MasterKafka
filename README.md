@@ -371,7 +371,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 	  	- Handle được lượng message lớn trong thời gian ngắn khi sever gặp vấn đề...
 	  	- Không tốn quá nhiều tài nguyên RAM, CPU.
 	  	- Handle được việc có nhiều partition
-	  	- Handle, tính toán số lượn intanse consumer thừ partition được có nhiều pods trên k8s khi `scaling in`, `scaling out`
+	  	- Handle, tính toán số lượn intanse consumer từ partition được có nhiều pods trên k8s khi `scaling in`, `scaling out`
 
 
 
