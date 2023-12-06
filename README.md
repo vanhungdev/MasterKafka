@@ -372,7 +372,8 @@ cho phép người quản trị và người phát triển tương tác với Do
 	  	- Không tốn quá nhiều tài nguyên RAM, CPU.
 	  	- Handle được việc có nhiều partition
 	  	- Handle, tính toán số lượn intanse consumer từ partition được có nhiều pods trên k8s khi `scaling in`, `scaling out`
-
+    - Về vấn đề Quản lý topic Consumer:
+    	- Có thể xem được các topic nào đang chạy - chạy đến partition nào - có bao nhiêu partition - có bao nhiêu instanse consumer của topic - có bao nhiêu pods đang chạy  
 
 
 **Concept:**  
