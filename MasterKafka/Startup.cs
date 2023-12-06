@@ -26,7 +26,6 @@ namespace MasterKafka
 
             services.AddSingleton<KafkaConsumerManager>();
             services.AddHostedService<MessageConsumer>();
-            services.AddSingleton<IOrdersProcess, OrdersProcess>();
             services.AddSingleton<IKafkaProducer, KafkaProducer>();
 
         }

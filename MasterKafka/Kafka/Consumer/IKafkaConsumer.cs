@@ -12,20 +12,12 @@ namespace MasterKafka.Kafka.Consumer
     {
 
         /// <summary>
-        /// 
+        /// start consuming
         /// </summary>
         /// <param name="topic"></param>
         /// <param name="stoppingToken"></param>
         /// <param name="consumerInstance"></param>
         /// <returns></returns>
         Task StartConsuming(string topic, CancellationToken stoppingToken);
-
-        /// <summary>
-        /// Stop all
-        /// </summary>
-        /// <param name="topic"></param>
-        /// <param name="stoppingToken"></param>
-        /// <returns></returns>
-        Task StopConsuming(CancellationToken stoppingToken);
     }
 }

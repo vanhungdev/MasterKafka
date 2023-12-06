@@ -11,53 +11,20 @@ namespace MasterKafka.BackgroudTaskService
     public class MessageConsumer : BackgroundService
     {
         private readonly KafkaConsumerManager _consumerManager;
-        private readonly IOrdersProcess _orderProcess;
 
-        public MessageConsumer(KafkaConsumerManager consumerManager, IOrdersProcess orderProcess)
+        public MessageConsumer(KafkaConsumerManager consumerManager)
         {
             _consumerManager = consumerManager;
-            _orderProcess = orderProcess;
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            // Ví dụ config cho topic 1
             var topic1 = "events1";
-            var topic2 = "events2";
-            var topic3 = "events3";
-            var topic4 = "events4";
-            var topic5 = "events5";
-            // More Topic
-            var instance = 10;
-
-
-
-
-
-            _consumerManager.AddConsumer(topic1, 
-                message => { _orderProcess.CreateOrderProcess(message, topic1); return Task.CompletedTask; }, 
-                KafkaConfiguration.ConsumerConfig, instance); // Configuration can be changed
-
-
-
-
-            /*_consumerManager.AddConsumer(topic2,
-                message => { _orderProcess.CreateOrderProcess(message, topic2); return Task.CompletedTask; },
-                KafkaConfiguration.ConsumerConfig);
-
-            _consumerManager.AddConsumer(topic3,
-                message => { _orderProcess.CreateOrderProcess(message, topic3); return Task.CompletedTask; },
-                KafkaConfiguration.ConsumerConfig);
-
-            _consumerManager.AddConsumer(topic4,
-                message => { _orderProcess.CreateOrderProcess(message, topic4); return Task.CompletedTask; },
-                KafkaConfiguration.ConsumerConfig);
-
-            _consumerManager.AddConsumer(topic5,
-                message => { _orderProcess.CreateOrderProcess(message, topic5); return Task.CompletedTask; },
-                KafkaConfiguration.ConsumerConfig);*/
+            var instanceTopic1 = 1;
+            _consumerManager.AddConsumer(topic1, new OrdersProcess(), KafkaConfiguration.ConsumerConfig, instanceTopic1);
 
             // More thread
-
-            await _consumerManager.StartAllConsumersAsync(stoppingToken); // Start parallel
+            await _consumerManager.StartAllConsumersAsync(stoppingToken); // Start consumer threads
         }
     }
 }

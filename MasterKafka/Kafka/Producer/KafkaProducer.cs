@@ -19,7 +19,7 @@ namespace MasterKafka.Kafka.Producer
                 var result = await producer.ProduceAsync(topic, message);
 
                 //log.AppendLine($"Input: {jsonObj}");
-                log.AppendLine($"m: {val} to offset: {result.TopicPartitionOffset.Offset.Value}");
+                log.AppendLine($"m: {messageValue} to offset: {result.TopicPartitionOffset.Offset.Value}");
                 return true;
             }
             catch (ProduceException<Null, string> e)

@@ -16,12 +16,13 @@ namespace MasterKafka.Kafka.Consumer
         }
 
         /// <summary>
-        /// Add a consumer thread
+        /// Add topic consumer
         /// </summary>
-        /// <param name="topic"></param>
-        /// <param name="messageHandler"></param>
-        /// <param name="config"></param>
-        public void AddConsumer(string topic, Func<string, Task> messageHandler, ConsumerConfig config, int instance)
+        /// <param name="topic"> Topic name</param>
+        /// <param name="messageHandler"> Method xử lý message</param>
+        /// <param name="config"> Config consumer implement từ IMessageHandler</param>
+        /// <param name="instance"> Số lượng instance tương ứng với ố partition</param>
+        public void AddConsumer(string topic, IMessageHandler messageHandler, ConsumerConfig config, int instance)
         {
             if (!_consumers.ContainsKey(topic))
             {
