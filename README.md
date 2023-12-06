@@ -357,7 +357,6 @@ cho phép người quản trị và người phát triển tương tác với Do
 	- Xử lý exception nếu có lỗi xảy ra.
 	- Như vậy là đã gửi thành công 1 message lên Kafka.
 
-
 ## Xử lý code Consumer:
 
 1. Yêu cầu bài toán:
@@ -371,7 +370,8 @@ cho phép người quản trị và người phát triển tương tác với Do
 	  	- Chạy ổn định không mất message.
 	  	- Handle được lượng message lớn trong thời gian ngắn khi sever gặp vấn đề...
 	  	- Không tốn quá nhiều tài nguyên RAM, CPU.
-
+	  	- Handle được việc có nhiều partition
+	  	- Handle, tính toán số lượn intanse consumer thừ partition được có nhiều pods trên k8s khi `scaling in`, `scaling out`
 
 
 
