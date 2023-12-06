@@ -377,9 +377,9 @@ cho phép người quản trị và người phát triển tương tác với Do
     			- Có thể xem được các topic nào đang chạy.  
 	    		- Topic có bao nhiêu partition.  
 	    		- partition chạy đến offset nào.  
-	    		- có bao nhiêu offset.  
-	    		- có bao nhiêu instanse consumer của topic.  
-	    		- có bao nhiêu pods đang chạy (nếu system cung cấp được Kafdrop thig quá ngon không cần nguyên cứu phần này).  
+	    		- Có bao nhiêu offset.  
+	    		- Có bao nhiêu instanse consumer của topic.  
+	    		- Có bao nhiêu pods đang chạy (nếu system cung cấp được Kafdrop thig quá ngon không cần nguyên cứu phần này).  
     	- Có thể xem được message nào xử lý faild, có thể push lại.
 
 **Concept:**  
