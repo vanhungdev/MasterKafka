@@ -362,7 +362,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 
  **Yêu cầu bài toán:**
   
-  **Về vấn đề refactor code:**  
+  **1. Về vấn đề refactor code:**  
   	- Khi có một topic mới chúng ta chỉ cần config thông tin kafka và viết method xử lý cho nó là có thể thực hiện việc consumer.  
   	- khi config 1 topic mới hoặc một bootstrap server mới thì sẽ implement 3 method `Xử lý message`, `Xử lý message thành công`, `Xử lý message thất bại`.  
 
