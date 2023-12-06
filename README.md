@@ -303,7 +303,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 2. Code xử lý code Producer : 
 
     ```csharp
-	    public class KafkaProducer : IKafkaProducer
+	public class KafkaProducer : IKafkaProducer
 	    {
 	        public async Task<bool> ProducePushMessage(string topic, ProducerConfig config, object objRequest, string messageValue)
 	        {
