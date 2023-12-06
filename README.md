@@ -386,7 +386,15 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
 **Concept:**  
 1. Về trường hợp nếu có 1 topic, 1 partition:
 	- hệ thống sẽ tạo một instance consumner và subscribe 1 topic
-	     - Bước 1 hệ thống 
+	     - Bước 1: hệ thống
+	     - Bước 2: hệ thống
+	     - Bước 3: hệ thống
+	     - Bước 4: hệ thống
+	     - Bước 5: hệ thống
+	     - Bước 6: hệ thống
+	     - Bước 7: hệ thống
+	     - Bước 8: hệ thống
+	     - Bước 9: hệ thống
 
 
  
