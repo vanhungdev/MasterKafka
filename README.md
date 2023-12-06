@@ -365,12 +365,12 @@ cho phép người quản trị và người phát triển tương tác với Do
 		- Khi có một topic mới chúng ta chỉ cần config thông tin kafka và viết method xử lý cho nó là có thể thực hiện việc consumer.  
   		- khi config 1 topic mới hoặc một bootstrap server mới thì sẽ implement 3 method `Xử lý message`, `Xử lý message thành công`, `Xử lý message thất bại`.
 
-2. Về vấn đề performance:  
-  	- Xử lý được song song các message - 1 message bị exception không được dừng luồng consumer đang chạy.  
-  	- Xử lý song song các topic 1 topic bị dừng không ảnh hưởng đến các topic khác.  
-  	- Chạy ổn định không mất message
-  	- Xử lý được lượng message lớn trong thời gian ngắn
-  	- Không tốn quá nhiều tài nguyên RAM, CPU
+    - Về vấn đề performance:  
+	  	- Xử lý được song song các message - 1 message bị exception không được dừng luồng consumer đang chạy.  
+	  	- Xử lý song song các topic 1 topic bị dừng không ảnh hưởng đến các topic khác.  
+	  	- Chạy ổn định không mất message
+	  	- Xử lý được lượng message lớn trong thời gian ngắn
+	  	- Không tốn quá nhiều tài nguyên RAM, CPU
 
 
 
