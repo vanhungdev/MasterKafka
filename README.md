@@ -422,4 +422,6 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
 
 Logo trong git readme.md
 
+![Tên mô tả](https://i.ibb.co/MCHgLF3/Luxea-Rec2023-12-06-16-43-16.gif)
+
 <img width="50%" src="https://i.ibb.co/MCHgLF3/Luxea-Rec2023-12-06-16-43-16.gif" />
