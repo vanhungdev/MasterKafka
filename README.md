@@ -420,5 +420,5 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
 
 	```	
 
-đâsd
-![OpenAI Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/OpenID_logo_2.svg/1200px-OpenID_logo_2.svg.png)
+Logo trong git readme.md
+![OpenAI Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/OpenID_logo_2.svg/1200px-OpenID_logo_2.svg.png =50%)
