@@ -380,7 +380,7 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
 	    		- Partition chạy đến offset nào.  
 	    		- Có bao nhiêu offset.  
 	    		- Có bao nhiêu instanse consumer của topic.  
-	    		- Có bao nhiêu pods đang chạy (nếu system cung cấp được Kafdrop thig quá ngon không cần nguyên cứu phần này).  
+	    		- Có bao nhiêu pods đang chạy (nếu system cung cấp được Kafdrop thì quá ngon không cần nguyên cứu phần này).  
     	- Có thể xem được message nào xử lý faild, có thể push lại.
 
 **Concept:**  
@@ -419,3 +419,6 @@ Như vậy là đã gửi thành công 1 message lên Kafka.
 	}
 
 	```	
+
+đâsd
+![OpenAI Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/OpenAI_logo.svg/2560px-OpenAI_logo.svg.png)
