@@ -56,7 +56,6 @@ networks:
     driver: bridge
 
 services:
-
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
