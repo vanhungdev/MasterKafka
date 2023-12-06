@@ -354,7 +354,7 @@ cho phép người quản trị và người phát triển tương tác với Do
 	- Serialize object request sang JSON.
 	- Đóng gói message value vào trong Kafka Message.
 	- Gọi ProduceAsync để ghi message lên Kafka, trả về kết quả là offset message đã được ghi.
-	- Xử lý exception nếu có lỗi xảy ra.
+	- Xử lý exception nếu có lỗi xảy ra.  
 Như vậy là đã gửi thành công 1 message lên Kafka.
 
 ## Xử lý code Consumer:
