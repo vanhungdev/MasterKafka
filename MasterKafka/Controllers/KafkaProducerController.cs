@@ -1,7 +1,11 @@
 ﻿using Confluent.Kafka;
+using Google.Protobuf.WellKnownTypes;
 using MasterKafka.Kafka.Producer;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MasterKafka.Controllers
@@ -21,7 +25,7 @@ namespace MasterKafka.Controllers
         {
             var config1 = new ProducerConfig
             {
-                BootstrapServers = "34.171.40.194:9092"
+                BootstrapServers = "34.27.189.200:9092"
             };
 
             Parallel.For(0, input.Topics.Count, i =>
@@ -41,6 +45,41 @@ namespace MasterKafka.Controllers
                 }
             });
             return Ok("Đang xử lý. Vui lòng xem console hoặc Kafdrop.");
+        }
+
+        [HttpPost("api/TestAsync")]
+        public async Task<IActionResult> TestAsync()
+        {
+            Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- start");
+
+            int[] array = new int[1000];
+
+            for (int i = 0; i < 1000; i++)
+            {
+                array[i] = i + 1;
+            }
+
+            Parallel.ForEach(array, new ParallelOptions { MaxDegreeOfParallelism = 5 }, async (item, state) =>
+            {
+                Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- start paraller {item}");
+                await Task1(item);
+            });
+
+            return Ok("Done.");
+        }
+        async Task<int> Task1(int value)
+        {
+            Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- start task 1... {value}");
+            await Task.Delay(20000);
+            Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- done task 1! {value}");
+            return 1;
+        }
+        async Task<int> Task2(int value)
+        {
+            Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- start task 2... {value}");
+            await Task.Delay(20000);
+            Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- done task 2! {value}");
+            return 1;
         }
     }
 

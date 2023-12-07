@@ -18,12 +18,12 @@ namespace MasterKafka.BackgroudTaskService
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            // Ví dụ config cho topic 1
+            // Example config for topic 1
             var topic1 = "events1";
-            var instanceTopic1 = 1;
+            var instanceTopic1 = 1; // Number of instances (number of instances is greater than or equal to the number of partitions in topic)
             _consumerManager.AddConsumer(topic1, new OrdersProcess(), KafkaConfiguration.ConsumerConfig, instanceTopic1);
-
             // More thread
+
             await _consumerManager.StartAllConsumersAsync(stoppingToken); // Start consumer threads
         }
     }

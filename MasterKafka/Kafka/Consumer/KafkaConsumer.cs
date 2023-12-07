@@ -1,4 +1,6 @@
-﻿using Confluent.Kafka;
+﻿using Akka.Configuration.Hocon;
+using Akka.Streams.Dsl;
+using Confluent.Kafka;
 using DotNetty.Common.Utilities;
 using System;
 using System.Collections.Generic;
@@ -13,9 +15,10 @@ namespace MasterKafka.Kafka.Consumer
         private readonly IMessageHandler _messageHandler;
         private readonly ConsumerConfig _kafkaConfig;
         private readonly int _instance;
-        private const int TIME_OUT_PROCESS_MESSAGE = 20; // 20s nếu không xử lý xong thì chặn
-        const int MAX_CONSUMER_MESSAGE_BATCH = 9; // Mỗi lần consumer lấy 30 item rồi chia batch
-        const int MAX_MESSAGE_PARALLELISM = 3; // Mỗi lần lop parallel 
+        private const int TIME_OUT_PROCESS_MESSAGE = 20; // After 20 seconds, if the process is not completed, block it
+        const int MAX_CONSUMER_MESSAGE_BATCH = 30; // Each time the consumer takes 30 items and then batches them
+        const int MAX_MESSAGE_PARALLELISM = 5; // Number of threads per parallel lop 
+        private SemaphoreSlim semaphore = new SemaphoreSlim(MAX_MESSAGE_PARALLELISM);
 
         public KafkaConsumer(IMessageHandler messageHandler, ConsumerConfig kafkaConfig, int instance)
         {
@@ -26,20 +29,21 @@ namespace MasterKafka.Kafka.Consumer
 
         public Task StartConsuming(string topic, CancellationToken stoppingToken)
         {
+            int threadCount = 0;
             List<IConsumer<Ignore, string>> consumers = CreateInstanceConsumers(_kafkaConfig, topic, _instance);
 
-            int threadCount = 0;
             Parallel.ForEach(consumers, new ParallelOptions { MaxDegreeOfParallelism = _instance }, consumer =>
             {
                 int threadId = Interlocked.Increment(ref threadCount);
                 Console.WriteLine($"Start thread #{threadId}");
+
                 ConsumePartition(consumer, stoppingToken, topic, threadId);
             });
             return Task.CompletedTask;
         }
 
         /// <summary>
-        /// 
+        /// Create the number of suspended consumer instances from the consumerInstance variable
         /// </summary>
         /// <param name="config"></param>
         /// <param name="topics"></param>
@@ -60,7 +64,7 @@ namespace MasterKafka.Kafka.Consumer
         }
 
         /// <summary>
-        /// 
+        /// Commumer handling for each instance
         /// </summary>
         /// <param name="consumer"></param>
         /// <param name="stoppingToken"></param>
@@ -73,9 +77,7 @@ namespace MasterKafka.Kafka.Consumer
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     var batch = ReadMessageBatchFromKafka(consumer, threadId);
-                    //Console.WriteLine($"Batch {JsonConvert.SerializeObject(batch)}");
-                    Console.WriteLine($"Batch Count {batch.Count()} -- Topic: {topic}");
-                    Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")}");
+                    Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Batch Count {batch.Count()} -- Topic: {topic}");
                     Console.WriteLine($"------------------------------------------");
 
                     Parallel.ForEach(batch, new ParallelOptions { MaxDegreeOfParallelism = MAX_MESSAGE_PARALLELISM },
@@ -83,23 +85,19 @@ namespace MasterKafka.Kafka.Consumer
                       {
                           try
                           {
-                              await HandleMessageWithTimeout(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE);
-                              await _messageHandler.HandleSuccess(msg, topic);
-
-                              /*  HandleMessageWithTimeout(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE).GetAwaiter().GetResult();
-                                _messageHandler.HandleSuccess(msg, topic).GetAwaiter().GetResult();*/
-
+                              await HandleMessageWithTimeout1(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE);
+                              //await HandleMessageWithTimeout(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE, null, true);
                           }
                           catch (Exception ex)
                           {
-                               await _messageHandler.HandleFailure(msg, topic, ex);
+                              //await HandleMessageWithTimeout(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE, ex, false);
                           }
                       });
                 }
             }
             catch (OperationCanceledException oe)
             {
-                string exceptionMessage = oe.Message;
+                Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} | OperationCanceledException:  {oe.Message}");
             }
             finally
             {
@@ -108,7 +106,7 @@ namespace MasterKafka.Kafka.Consumer
         }
 
         /// <summary>
-        /// 
+        /// Collection message
         /// </summary>
         /// <param name="consumer"></param>
         /// <param name="threadId"></param>
@@ -120,12 +118,12 @@ namespace MasterKafka.Kafka.Consumer
             {
                 try
                 {
-                    // Lấy message và add vào batch
-                    var result = consumer.Consume(TimeSpan.FromMilliseconds(100)); // Chờ 3s nếu k có message mới thì trả về null || 100*30 =3000 = 3s
+                    // Wait 0,3 seconds, if there is no new message, return null - 100*30 =3000 = 3s
+                    var result = consumer.Consume(TimeSpan.FromMilliseconds(100));
                     if (result != null && result.Message != null && !string.IsNullOrEmpty(result.Message.Value))
                     {
                         batch.Add(result.Message.Value);    
-                        consumer.Commit(result); // Commit offset
+                        consumer.Commit(result);
                         var offset = result.Offset;
                         var partition = result.Partition;
                         Console.WriteLine($"ThreadId: {threadId } || Consumer offset: {offset} || partition: {partition} -- {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- mesage: {result.Message.Value}");
@@ -141,6 +139,44 @@ namespace MasterKafka.Kafka.Consumer
         }
 
         /// <summary>
+        /// Handle message time out
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="messageHandler"></param>
+        /// <param name="topic"></param>
+        /// <param name="timeoutSeconds"></param>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        /// <exception cref="TimeoutException"></exception>
+        private async Task HandleMessageWithTimeout(string msg, IMessageHandler messageHandler, string topic, int timeoutSeconds, Exception ex, bool isHandleMessage)
+        {
+            using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds)))
+            {
+                try
+                {
+                    await semaphore.WaitAsync(cts.Token);
+                    if (isHandleMessage)
+                    {
+                        await messageHandler.HandleMessage(msg, topic, cts.Token);
+                        await messageHandler.HandleSuccess(msg, topic);
+                    }
+                    else 
+                    {
+                        await messageHandler.HandleFailure(msg, topic, ex);
+                    }
+                }
+                catch(OperationCanceledException oce)
+                {
+                    throw new TimeoutException("Message handling timed out!");
+                }
+                finally
+                {
+                    semaphore.Release();
+                }
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="msg"></param>
@@ -149,11 +185,11 @@ namespace MasterKafka.Kafka.Consumer
         /// <param name="timeoutSeconds"></param>
         /// <returns></returns>
         /// <exception cref="TimeoutException"></exception>
-        private async Task HandleMessageWithTimeout(string msg, IMessageHandler messageHandler, string topic, int timeoutSeconds)
+        private async Task HandleMessageWithTimeout1(string msg, IMessageHandler messageHandler, string topic, int timeoutSeconds)
         {
             using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds)))
             {
-                var completedTask = await Task.WhenAny(messageHandler.HandleMessage(msg, topic),
+                var completedTask = await Task.WhenAny(messageHandler.HandleMessage(msg, topic, cts.Token),
                   Task.Delay(Timeout.Infinite, cts.Token));
 
                 if (completedTask.IsCanceled)
