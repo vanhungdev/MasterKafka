@@ -260,7 +260,8 @@ cho phép người quản trị và người phát triển tương tác với Do
 
  Yêu cầu bài toán:  
  - Có thể push message nhanh nhất khi có topic mới hoặc bootstrap server mới.  
- - Có ghi log đầy đủ push tới topic nào, PartitionOffset nào.  
+ - Có ghi log đầy đủ push tới topic nào, PartitionOffset nào.
+ - Có thể push vào các partition được chỉ định.  
 
  
 1. Curl push mesage: 
