@@ -35,7 +35,7 @@ namespace MasterKafka.Kafka.Consumer
             Parallel.ForEach(consumers, new ParallelOptions { MaxDegreeOfParallelism = _instance }, consumer =>
             {
                 int threadId = Interlocked.Increment(ref threadCount);
-                Console.WriteLine($"Start thread #{threadId}");
+                //Console.WriteLine($"Start thread #{threadId}");
 
                 ConsumePartition(consumer, stoppingToken, topic, threadId);
             });
@@ -85,12 +85,11 @@ namespace MasterKafka.Kafka.Consumer
                       {
                           try
                           {
-                              await HandleMessageWithTimeout1(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE);
-                              //await HandleMessageWithTimeout(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE, null, true);
+                              await HandleMessageWithTimeout(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE, null, true);
                           }
                           catch (Exception ex)
                           {
-                              //await HandleMessageWithTimeout(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE, ex, false);
+                              await HandleMessageWithTimeout(msg, _messageHandler, topic, TIME_OUT_PROCESS_MESSAGE, ex, false);
                           }
                       });
                 }
@@ -126,7 +125,7 @@ namespace MasterKafka.Kafka.Consumer
                         consumer.Commit(result);
                         var offset = result.Offset;
                         var partition = result.Partition;
-                        Console.WriteLine($"ThreadId: {threadId } || Consumer offset: {offset} || partition: {partition} -- {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- mesage: {result.Message.Value}");
+                        //Console.WriteLine($"ThreadId: {threadId } || Consumer offset: {offset} || partition: {partition} -- {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} -- mesage: {result.Message.Value}");
                     }
                 }
                 catch (ConsumeException ex)
@@ -157,44 +156,31 @@ namespace MasterKafka.Kafka.Consumer
                     await semaphore.WaitAsync(cts.Token);
                     if (isHandleMessage)
                     {
-                        await messageHandler.HandleMessage(msg, topic, cts.Token);
-                        await messageHandler.HandleSuccess(msg, topic);
+                        var handleMessage = await messageHandler.HandleMessage(msg, topic, cts.Token);
+                        if (handleMessage)
+                        {
+                            await messageHandler.HandleSuccess(msg, topic, cts.Token);
+                        }
                     }
                     else 
                     {
-                        await messageHandler.HandleFailure(msg, topic, ex);
+                        await messageHandler.HandleFailure(msg, topic, ex, cts.Token);
                     }
                 }
                 catch(OperationCanceledException oce)
                 {
-                    throw new TimeoutException("Message handling timed out!");
+                    if (isHandleMessage)
+                    {
+                        throw new TimeoutException($"Message handling timed out! Exception: {oce.Message}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"DateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} | Exception:  {oce.Message}");
+                    }
                 }
                 finally
                 {
                     semaphore.Release();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="messageHandler"></param>
-        /// <param name="topic"></param>
-        /// <param name="timeoutSeconds"></param>
-        /// <returns></returns>
-        /// <exception cref="TimeoutException"></exception>
-        private async Task HandleMessageWithTimeout1(string msg, IMessageHandler messageHandler, string topic, int timeoutSeconds)
-        {
-            using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds)))
-            {
-                var completedTask = await Task.WhenAny(messageHandler.HandleMessage(msg, topic, cts.Token),
-                  Task.Delay(Timeout.Infinite, cts.Token));
-
-                if (completedTask.IsCanceled)
-                {
-                    throw new TimeoutException("Message handling timed out!");
                 }
             }
         }

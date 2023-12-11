@@ -12,23 +12,23 @@ namespace MasterKafka.Kafka.Consumer
         /// <param name="message"></param>
         /// <param name="topic"></param>
         /// <returns></returns>
-        Task HandleMessage(string message, string topic, CancellationToken cancellationToken);
+        Task<bool> HandleMessage(string message, string topic, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Handle message if success
+        /// Handle message if success | never throw exception
         /// </summary>
         /// <param name="message"></param>
         /// <param name="topic"></param>
         /// <returns></returns>
-        Task HandleSuccess(string message, string topic);
+        Task<bool> HandleSuccess(string message, string topic, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Handle message faild
+        /// Handle message faild | never throw exception
         /// </summary>
         /// <param name="message"></param>
         /// <param name="topic"></param>
         /// <param name="exception"></param>
         /// <returns></returns>
-        Task HandleFailure(string message, string topic, Exception exception);
+        Task<bool> HandleFailure(string message, string topic, Exception exception, CancellationToken cancellationToken);
     }
 }

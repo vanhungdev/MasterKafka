@@ -1,4 +1,5 @@
-﻿using MasterKafka.Kafka.Consumer;
+﻿using Akka.Streams.Implementation.Fusing;
+using MasterKafka.Kafka.Consumer;
 using Newtonsoft.Json;
 using System;
 using System.Threading;
@@ -10,43 +11,61 @@ namespace MasterKafka.OrderProcess
     {
         public OrdersProcess() 
         {
+
         }
 
-        public async Task HandleMessage(string message, string topic, CancellationToken cancellationToken)
+        public async Task<bool> HandleMessage(string message, string topic, CancellationToken cancellationToken)
         {
             try
             {
-                if (cancellationToken.IsCancellationRequested)
-                {
-                    return;
-                }
                 //throw new Exception("throw exception proactive.");
                 var data = JsonConvert.DeserializeObject<MessageValuesDto>(message);
-                Console.WriteLine($"Start process message dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Topic: {topic}: Message: {data.Value}");
-                await Task.Delay(TimeSpan.FromSeconds(22), cancellationToken); // delay
-                if (cancellationToken.IsCancellationRequested)
-                {
-                    return;
-                }
-                Console.WriteLine($"Done process message dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Topic: {topic}: Message: {data.Value}");
+                //Console.WriteLine($"Start process message dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Topic: {topic}: Message: {data.Value}");
+                //await Task.Delay(TimeSpan.FromSeconds(22), cancellationToken); // delay
+
+                // Check for cancellation and throw TaskCanceledException
+                //cancellationToken.ThrowIfCancellationRequested();
+                //Console.WriteLine($"Done process message dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Topic: {topic}: Message: {data.Value}");
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex); // The exception message can be passed in
             }
+            return true;
         }
 
-        public async Task HandleSuccess(string message, string topic)
+        public async Task<bool> HandleSuccess(string message, string topic, CancellationToken cancellationToken)
         {
-            // TODO
+            try
+            {
+                // TODO
+                //await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+               // Console.WriteLine($"Handle success dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Topic:  {topic} Message: {message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Handle success exception dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} exception: {ex.Message} ");
+            }
             Console.WriteLine($"Handle success dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Topic:  {topic} Message: {message}");
+            return true;
         }
 
-        public async Task HandleFailure(string message, string topic, Exception exception)
+        public async Task<bool> HandleFailure(string message, string topic, Exception exception, CancellationToken cancellationToken)
         {
-            // TODO
-            //await Task.Delay(TimeSpan.FromSeconds(25));
-            Console.WriteLine($"Handle failure dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Topic:  {topic} Message: {message}");
+            try
+            {
+                // TODO
+                //await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+                //cancellationToken.ThrowIfCancellationRequested();
+                Console.WriteLine($"Handle failure dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} Topic:  {topic} Message: {message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Handle failure exception dateTime: {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")} exception: {ex.Message} ");
+                return false;
+            }
+            return true;
         }
     }
     public class MessageValuesDto
