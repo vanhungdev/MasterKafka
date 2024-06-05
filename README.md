@@ -471,3 +471,48 @@ Logo trong git readme.md
 ![Tên mô tả](https://i.ibb.co/MCHgLF3/Luxea-Rec2023-12-06-16-43-16.gif)
 
 <img width="50%" src="https://i.ibb.co/MCHgLF3/Luxea-Rec2023-12-06-16-43-16.gif" />
+
+
+
+```bash
+version: '3'
+
+networks:
+  kafka-net:
+    driver: bridge
+
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - kafka-net
+
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+      - "9093:9093" 
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://34.170.212.251:9092 
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks:
+      - kafka-net
+
+  kafdrop:
+    container_name: kafdrop
+    image: obsidiandynamics/kafdrop
+    ports:
+      - "9091:9000"
+    environment:
+      KAFKA_BROKERCONNECT: kafka:9093
+      JVM_OPTS: "-Xms32M -Xmx64M"
+    networks:
+     - kafka-net
+```
